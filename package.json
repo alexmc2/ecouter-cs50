@@ -1,0 +1,25 @@
+{
+  "name": "ecouter",
+  "version": "0.1.0",
+  "workspaces": [
+    "frontend",
+    "backend",
+    "scripts"
+  ],
+  "scripts": {
+    "dev:frontend": "npm run dev --prefix frontend",
+    "dev:backend": "npm run dev --prefix backend",
+    "dev": "concurrently --kill-others-on-fail --names backend,frontend --prefix-colors blue,green \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "typecheck:frontend": "npm run typecheck --prefix frontend",
+    "typecheck:backend": "npm run typecheck --prefix backend",
+    "typecheck": "npm run typecheck:frontend && npm run typecheck:backend",
+    "test:backend": "npm run test --prefix backend",
+    "test": "npm run test:backend",
+    "build:frontend": "npm run build --prefix frontend",
+    "build:backend": "npm run build --prefix backend",
+    "build": "npm run build:frontend && npm run build:backend"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
