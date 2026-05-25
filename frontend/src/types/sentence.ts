@@ -1,4 +1,4 @@
-export interface RawSentence {
+export interface SourceSentence {
   id: number;
   fra: string;
   eng: string;
