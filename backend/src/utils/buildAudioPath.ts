@@ -2,12 +2,12 @@
 import type { AudioSource } from '../types/listeningProfile';
 
 export type VoiceFolderName =
-  | 'french_female'
-  | 'french_male'
-  | 'english_female'
-  | 'english_male';
+  | 'fr_f_complete'
+  | 'fr_m_complete'
+  | 'en_f_complete'
+  | 'en_m_complete';
 
-export interface AudioSourceDefinition {
+interface AudioSourceDefinition {
   folder: VoiceFolderName;
   suffix: string;
 }
@@ -17,19 +17,19 @@ export const AUDIO_SOURCE_DEFINITIONS: Record<
   AudioSourceDefinition
 > = {
   fr_female: {
-    folder: 'french_female',
+    folder: 'fr_f_complete',
     suffix: 'fr_f',
   },
   fr_male: {
-    folder: 'french_male',
+    folder: 'fr_m_complete',
     suffix: 'fr_m',
   },
   en_female: {
-    folder: 'english_female',
+    folder: 'en_f_complete',
     suffix: 'en_f',
   },
   en_male: {
-    folder: 'english_male',
+    folder: 'en_m_complete',
     suffix: 'en_m',
   },
 };
