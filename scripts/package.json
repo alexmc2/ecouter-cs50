@@ -1,0 +1,17 @@
+{
+  "name": "scripts",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "import:sentences": "tsx src/importSentenceLibrary.ts",
+    "prepare:ranges": "tsx src/prepareLibraryRanges.ts",
+    "audio:manifest": "tsx src/generateAudioManifest.ts",
+    "audio:coverage": "tsx src/checkAudioCoverage.ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}

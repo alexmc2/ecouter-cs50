@@ -1,0 +1,450 @@
+[
+  {
+    "rangeNumber": 1,
+    "startPosition": 1,
+    "endPosition": 100,
+    "sentenceCount": 100,
+    "minEnCharLength": 3,
+    "maxEnCharLength": 14
+  },
+  {
+    "rangeNumber": 2,
+    "startPosition": 101,
+    "endPosition": 200,
+    "sentenceCount": 100,
+    "minEnCharLength": 14,
+    "maxEnCharLength": 16
+  },
+  {
+    "rangeNumber": 3,
+    "startPosition": 201,
+    "endPosition": 300,
+    "sentenceCount": 100,
+    "minEnCharLength": 16,
+    "maxEnCharLength": 17
+  },
+  {
+    "rangeNumber": 4,
+    "startPosition": 301,
+    "endPosition": 400,
+    "sentenceCount": 100,
+    "minEnCharLength": 17,
+    "maxEnCharLength": 19
+  },
+  {
+    "rangeNumber": 5,
+    "startPosition": 401,
+    "endPosition": 500,
+    "sentenceCount": 100,
+    "minEnCharLength": 19,
+    "maxEnCharLength": 20
+  },
+  {
+    "rangeNumber": 6,
+    "startPosition": 501,
+    "endPosition": 600,
+    "sentenceCount": 100,
+    "minEnCharLength": 20,
+    "maxEnCharLength": 21
+  },
+  {
+    "rangeNumber": 7,
+    "startPosition": 601,
+    "endPosition": 700,
+    "sentenceCount": 100,
+    "minEnCharLength": 21,
+    "maxEnCharLength": 22
+  },
+  {
+    "rangeNumber": 8,
+    "startPosition": 701,
+    "endPosition": 800,
+    "sentenceCount": 100,
+    "minEnCharLength": 22,
+    "maxEnCharLength": 22
+  },
+  {
+    "rangeNumber": 9,
+    "startPosition": 801,
+    "endPosition": 900,
+    "sentenceCount": 100,
+    "minEnCharLength": 22,
+    "maxEnCharLength": 23
+  },
+  {
+    "rangeNumber": 10,
+    "startPosition": 901,
+    "endPosition": 1000,
+    "sentenceCount": 100,
+    "minEnCharLength": 23,
+    "maxEnCharLength": 24
+  },
+  {
+    "rangeNumber": 11,
+    "startPosition": 1001,
+    "endPosition": 1100,
+    "sentenceCount": 100,
+    "minEnCharLength": 24,
+    "maxEnCharLength": 24
+  },
+  {
+    "rangeNumber": 12,
+    "startPosition": 1101,
+    "endPosition": 1200,
+    "sentenceCount": 100,
+    "minEnCharLength": 24,
+    "maxEnCharLength": 25
+  },
+  {
+    "rangeNumber": 13,
+    "startPosition": 1201,
+    "endPosition": 1300,
+    "sentenceCount": 100,
+    "minEnCharLength": 25,
+    "maxEnCharLength": 25
+  },
+  {
+    "rangeNumber": 14,
+    "startPosition": 1301,
+    "endPosition": 1400,
+    "sentenceCount": 100,
+    "minEnCharLength": 25,
+    "maxEnCharLength": 26
+  },
+  {
+    "rangeNumber": 15,
+    "startPosition": 1401,
+    "endPosition": 1500,
+    "sentenceCount": 100,
+    "minEnCharLength": 26,
+    "maxEnCharLength": 27
+  },
+  {
+    "rangeNumber": 16,
+    "startPosition": 1501,
+    "endPosition": 1600,
+    "sentenceCount": 100,
+    "minEnCharLength": 27,
+    "maxEnCharLength": 27
+  },
+  {
+    "rangeNumber": 17,
+    "startPosition": 1601,
+    "endPosition": 1700,
+    "sentenceCount": 100,
+    "minEnCharLength": 27,
+    "maxEnCharLength": 28
+  },
+  {
+    "rangeNumber": 18,
+    "startPosition": 1701,
+    "endPosition": 1800,
+    "sentenceCount": 100,
+    "minEnCharLength": 28,
+    "maxEnCharLength": 28
+  },
+  {
+    "rangeNumber": 19,
+    "startPosition": 1801,
+    "endPosition": 1900,
+    "sentenceCount": 100,
+    "minEnCharLength": 28,
+    "maxEnCharLength": 29
+  },
+  {
+    "rangeNumber": 20,
+    "startPosition": 1901,
+    "endPosition": 2000,
+    "sentenceCount": 100,
+    "minEnCharLength": 29,
+    "maxEnCharLength": 29
+  },
+  {
+    "rangeNumber": 21,
+    "startPosition": 2001,
+    "endPosition": 2100,
+    "sentenceCount": 100,
+    "minEnCharLength": 29,
+    "maxEnCharLength": 30
+  },
+  {
+    "rangeNumber": 22,
+    "startPosition": 2101,
+    "endPosition": 2200,
+    "sentenceCount": 100,
+    "minEnCharLength": 30,
+    "maxEnCharLength": 30
+  },
+  {
+    "rangeNumber": 23,
+    "startPosition": 2201,
+    "endPosition": 2300,
+    "sentenceCount": 100,
+    "minEnCharLength": 30,
+    "maxEnCharLength": 31
+  },
+  {
+    "rangeNumber": 24,
+    "startPosition": 2301,
+    "endPosition": 2400,
+    "sentenceCount": 100,
+    "minEnCharLength": 31,
+    "maxEnCharLength": 31
+  },
+  {
+    "rangeNumber": 25,
+    "startPosition": 2401,
+    "endPosition": 2500,
+    "sentenceCount": 100,
+    "minEnCharLength": 31,
+    "maxEnCharLength": 32
+  },
+  {
+    "rangeNumber": 26,
+    "startPosition": 2501,
+    "endPosition": 2600,
+    "sentenceCount": 100,
+    "minEnCharLength": 32,
+    "maxEnCharLength": 32
+  },
+  {
+    "rangeNumber": 27,
+    "startPosition": 2601,
+    "endPosition": 2700,
+    "sentenceCount": 100,
+    "minEnCharLength": 32,
+    "maxEnCharLength": 33
+  },
+  {
+    "rangeNumber": 28,
+    "startPosition": 2701,
+    "endPosition": 2800,
+    "sentenceCount": 100,
+    "minEnCharLength": 33,
+    "maxEnCharLength": 34
+  },
+  {
+    "rangeNumber": 29,
+    "startPosition": 2801,
+    "endPosition": 2900,
+    "sentenceCount": 100,
+    "minEnCharLength": 34,
+    "maxEnCharLength": 34
+  },
+  {
+    "rangeNumber": 30,
+    "startPosition": 2901,
+    "endPosition": 3000,
+    "sentenceCount": 100,
+    "minEnCharLength": 34,
+    "maxEnCharLength": 35
+  },
+  {
+    "rangeNumber": 31,
+    "startPosition": 3001,
+    "endPosition": 3100,
+    "sentenceCount": 100,
+    "minEnCharLength": 35,
+    "maxEnCharLength": 35
+  },
+  {
+    "rangeNumber": 32,
+    "startPosition": 3101,
+    "endPosition": 3200,
+    "sentenceCount": 100,
+    "minEnCharLength": 35,
+    "maxEnCharLength": 36
+  },
+  {
+    "rangeNumber": 33,
+    "startPosition": 3201,
+    "endPosition": 3300,
+    "sentenceCount": 100,
+    "minEnCharLength": 36,
+    "maxEnCharLength": 37
+  },
+  {
+    "rangeNumber": 34,
+    "startPosition": 3301,
+    "endPosition": 3400,
+    "sentenceCount": 100,
+    "minEnCharLength": 37,
+    "maxEnCharLength": 37
+  },
+  {
+    "rangeNumber": 35,
+    "startPosition": 3401,
+    "endPosition": 3500,
+    "sentenceCount": 100,
+    "minEnCharLength": 37,
+    "maxEnCharLength": 38
+  },
+  {
+    "rangeNumber": 36,
+    "startPosition": 3501,
+    "endPosition": 3600,
+    "sentenceCount": 100,
+    "minEnCharLength": 38,
+    "maxEnCharLength": 39
+  },
+  {
+    "rangeNumber": 37,
+    "startPosition": 3601,
+    "endPosition": 3700,
+    "sentenceCount": 100,
+    "minEnCharLength": 39,
+    "maxEnCharLength": 40
+  },
+  {
+    "rangeNumber": 38,
+    "startPosition": 3701,
+    "endPosition": 3800,
+    "sentenceCount": 100,
+    "minEnCharLength": 40,
+    "maxEnCharLength": 41
+  },
+  {
+    "rangeNumber": 39,
+    "startPosition": 3801,
+    "endPosition": 3900,
+    "sentenceCount": 100,
+    "minEnCharLength": 41,
+    "maxEnCharLength": 42
+  },
+  {
+    "rangeNumber": 40,
+    "startPosition": 3901,
+    "endPosition": 4000,
+    "sentenceCount": 100,
+    "minEnCharLength": 42,
+    "maxEnCharLength": 43
+  },
+  {
+    "rangeNumber": 41,
+    "startPosition": 4001,
+    "endPosition": 4100,
+    "sentenceCount": 100,
+    "minEnCharLength": 43,
+    "maxEnCharLength": 44
+  },
+  {
+    "rangeNumber": 42,
+    "startPosition": 4101,
+    "endPosition": 4200,
+    "sentenceCount": 100,
+    "minEnCharLength": 44,
+    "maxEnCharLength": 45
+  },
+  {
+    "rangeNumber": 43,
+    "startPosition": 4201,
+    "endPosition": 4300,
+    "sentenceCount": 100,
+    "minEnCharLength": 45,
+    "maxEnCharLength": 46
+  },
+  {
+    "rangeNumber": 44,
+    "startPosition": 4301,
+    "endPosition": 4400,
+    "sentenceCount": 100,
+    "minEnCharLength": 46,
+    "maxEnCharLength": 47
+  },
+  {
+    "rangeNumber": 45,
+    "startPosition": 4401,
+    "endPosition": 4500,
+    "sentenceCount": 100,
+    "minEnCharLength": 47,
+    "maxEnCharLength": 49
+  },
+  {
+    "rangeNumber": 46,
+    "startPosition": 4501,
+    "endPosition": 4600,
+    "sentenceCount": 100,
+    "minEnCharLength": 49,
+    "maxEnCharLength": 51
+  },
+  {
+    "rangeNumber": 47,
+    "startPosition": 4601,
+    "endPosition": 4700,
+    "sentenceCount": 100,
+    "minEnCharLength": 51,
+    "maxEnCharLength": 53
+  },
+  {
+    "rangeNumber": 48,
+    "startPosition": 4701,
+    "endPosition": 4800,
+    "sentenceCount": 100,
+    "minEnCharLength": 53,
+    "maxEnCharLength": 55
+  },
+  {
+    "rangeNumber": 49,
+    "startPosition": 4801,
+    "endPosition": 4900,
+    "sentenceCount": 100,
+    "minEnCharLength": 55,
+    "maxEnCharLength": 57
+  },
+  {
+    "rangeNumber": 50,
+    "startPosition": 4901,
+    "endPosition": 5000,
+    "sentenceCount": 100,
+    "minEnCharLength": 57,
+    "maxEnCharLength": 60
+  },
+  {
+    "rangeNumber": 51,
+    "startPosition": 5001,
+    "endPosition": 5100,
+    "sentenceCount": 100,
+    "minEnCharLength": 60,
+    "maxEnCharLength": 65
+  },
+  {
+    "rangeNumber": 52,
+    "startPosition": 5101,
+    "endPosition": 5200,
+    "sentenceCount": 100,
+    "minEnCharLength": 65,
+    "maxEnCharLength": 71
+  },
+  {
+    "rangeNumber": 53,
+    "startPosition": 5201,
+    "endPosition": 5300,
+    "sentenceCount": 100,
+    "minEnCharLength": 71,
+    "maxEnCharLength": 79
+  },
+  {
+    "rangeNumber": 54,
+    "startPosition": 5301,
+    "endPosition": 5400,
+    "sentenceCount": 100,
+    "minEnCharLength": 79,
+    "maxEnCharLength": 92
+  },
+  {
+    "rangeNumber": 55,
+    "startPosition": 5401,
+    "endPosition": 5500,
+    "sentenceCount": 100,
+    "minEnCharLength": 92,
+    "maxEnCharLength": 132
+  },
+  {
+    "rangeNumber": 56,
+    "startPosition": 5501,
+    "endPosition": 5516,
+    "sentenceCount": 16,
+    "minEnCharLength": 132,
+    "maxEnCharLength": 162
+  }
+]
