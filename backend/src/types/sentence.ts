@@ -18,7 +18,7 @@ export interface Sentence {
 }
 
 export interface SentenceRange {
-  page: number;
+  rangeNumber: number;
   startPosition: number;
   endPosition: number;
   sentenceCount: number;
