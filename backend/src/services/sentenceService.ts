@@ -9,7 +9,7 @@ import { mapSourceSentence } from '../utils/mapSentence';
 import { paginateItems } from '../utils/pagination';
 import { buildSentenceRanges } from './sentenceRangeService';
 
-// loads the source sentences from the master json file (sentences.json) and maps the data to the backend controller and services.
+// loads the source sentences from the master json file (sentences.json) and maps the data for the controller. 
 
 const sourceSentences = sentencesJson as SourceSentence[];
 
