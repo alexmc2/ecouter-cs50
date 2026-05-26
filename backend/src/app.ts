@@ -3,6 +3,7 @@ import express from 'express';
 import { env } from './config/env';
 
 import { healthRoutes } from './routes/healthRoutes';
+import { sentenceRoutes } from './routes/sentenceRoutes';
 
 export const app = express();
 
@@ -14,3 +15,4 @@ app.use(
 app.use(express.json());
 
 app.use(healthRoutes);
+app.use(sentenceRoutes);

@@ -1,3 +1,4 @@
+// AI assisted with the creation of the library ranges preparation script.
 import fs from 'node:fs';
 import path from 'node:path';
 

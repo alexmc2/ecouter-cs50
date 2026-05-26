@@ -1,4 +1,4 @@
-
+// AI assisted with the creation of the audio coverage check script.
 import fs from "node:fs";
 import path from "node:path";
 
