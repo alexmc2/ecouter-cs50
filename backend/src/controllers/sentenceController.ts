@@ -5,7 +5,7 @@ import {
   getSentenceRanges,
 } from '../services/sentenceService';
 
-function readNumberParam(value: any, fallback: number): number {
+function readNumberParam(value: unknown, fallback: number): number {
   const firstValue = Array.isArray(value) ? value[0] : value;
   // Parses numeric strings and return a number or fallback value
   const parsed = Number(firstValue);

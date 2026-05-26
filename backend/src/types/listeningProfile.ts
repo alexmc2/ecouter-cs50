@@ -1,6 +1,6 @@
 export type AudioSource = 'fr_female' | 'fr_male' | 'en_female' | 'en_male';
 
-export type ListeningProfileItems =
+export type ListeningProfileItem =
   | {
       id: string;
       type: 'audio';
@@ -22,5 +22,5 @@ export type ListeningProfileItems =
 export interface ListeningProfile {
   id: string;
   name: string;
-  steps: ListeningProfileItems[];
+  steps: ListeningProfileItem[];
 }

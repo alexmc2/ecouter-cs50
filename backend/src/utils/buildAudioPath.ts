@@ -1,6 +1,6 @@
-// AI assisted with building the audio path helper.
 import type { AudioSource } from '../types/listeningProfile';
 
+// This file contains the utility functions for building the file paths and URLs for audio files.
 export type VoiceFolderName =
   | 'fr_f_complete'
   | 'fr_m_complete'
@@ -44,6 +44,7 @@ export function buildAudioFilename(
 ): string {
   const definition = AUDIO_SOURCE_DEFINITIONS[audioSource];
 
+  // Returns {sentenceId}_{audioSourceSuffix}.wav - for example: 100001_fr_f.wav
   return `${sentenceId}_${definition.suffix}.wav`;
 }
 
@@ -54,5 +55,6 @@ export function buildAudioUrl(
   const definition = AUDIO_SOURCE_DEFINITIONS[audioSource];
   const filename = buildAudioFilename(sentenceId, audioSource);
 
+  // Returns the full URL for the audio file - for example: /api/audio/fr_f_complete/100001_fr_f.wav
   return `/api/audio/${definition.folder}/${filename}`;
 }

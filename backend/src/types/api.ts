@@ -7,3 +7,9 @@ export interface PaginatedResponse<T> {
   startPosition: number;
   endPosition: number;
 }
+export interface ErrorResponse {
+  error: {
+    message: string;
+    statusCode: number;
+  };
+}
