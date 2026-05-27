@@ -1,7 +1,6 @@
+import type { ButtonHTMLAttributes, PropsWithChildren } from 'react';
 
-import type { ButtonHTMLAttributes, PropsWithChildren } from "react";
-
-type AppButtonVariant = "primary" | "secondary" | "ghost";
+type AppButtonVariant = 'primary' | 'secondary' | 'ghost';
 
 interface AppButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: AppButtonVariant;
@@ -9,8 +8,8 @@ interface AppButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 export function AppButton({
   children,
-  className = "",
-  variant = "secondary",
+  className = '',
+  variant = 'secondary',
   ...buttonProps
 }: PropsWithChildren<AppButtonProps>) {
   return (

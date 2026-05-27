@@ -43,10 +43,6 @@
   padding: 20px;
 }
 
-.sentence-range-card > div {
-  min-width: 0;
-}
-
 .sentence-range-card strong,
 .sentence-range-card span {
   display: block;
@@ -57,35 +53,22 @@
   font-size: 1.35rem;
 }
 
-.sentence-range-card__preview {
-  display: grid;
-  gap: 4px;
-  margin: 10px 0 0;
-  min-width: 0;
-  text-align: left;
-}
-
-.sentence-range-card__preview span {
-  max-width: 100%;
-  overflow: hidden;
-  color: var(--color-text-muted);
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
 .sentence-range-card span {
+  margin-top: 5px;
   color: var(--color-text-muted);
+
   font-size: 0.78rem;
 }
 
-.range-chip {
+.sentence-range-card .range-chip {
   align-self: start;
-  border: 2px solid var(--color-border-strong);
-  border-radius: var(--radius-control);
-  background: var(--color-panel-soft);
+  margin-top: 0;
+  border: 1px solid var(--color-accent-line);
+  border-radius: var(--radius-card);
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
   padding: 5px 10px;
   white-space: nowrap;
-
 }
 
 .library-range {
@@ -115,9 +98,10 @@
   grid-template-columns: auto 46px minmax(0, 1fr) auto;
   align-items: center;
   gap: 12px;
-  border: 1px solid transparent;
-  border-radius: var(--radius-card);
+
+
   padding: 11px 14px;
+  border-top: 1px solid var(--color-border);
 }
 
 .sentence-list-item--selected {
@@ -143,7 +127,7 @@
   background: var(--color-accent);
 }
 
-.sentence-list-item__position {
+.sentence-list-item__id {
   color: var(--color-text-faint);
   font-size: 0.78rem;
   font-weight: 700;

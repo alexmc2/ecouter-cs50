@@ -1,21 +1,20 @@
-
 import { useState } from 'react';
 import { LibraryQuickStart } from '../components/library/LibraryQuickStart';
 import { SelectionToolbar } from '../components/library/SelectionToolbar';
 import { SentenceListItem } from '../components/library/SentenceListItem';
 import { SentenceRangeCard } from '../components/library/SentenceRangeCard';
 import { AppButton } from '../components/shared/AppButton';
-import type { CurrentRun } from '../types/currentRun';
+import { EmptyState } from '../components/shared/EmptyState';
+import { ErrorState } from '../components/shared/ErrorState';
+import { LoadingState } from '../components/shared/LoadingState';
 import { useSentenceRanges } from '../hooks/useSentenceRanges';
 import { useSentenceSelection } from '../hooks/useSentenceSelection';
 import { useSentences } from '../hooks/useSentences';
+import type { CurrentRun } from '../types/currentRun';
 import {
   createCurrentRunFromSelection,
   createStarterCurrentRun,
 } from '../utils/createCurrentRun';
-import { EmptyState } from '../components/shared/EmptyState';
-import { ErrorState } from '../components/shared/ErrorState';
-import { LoadingState } from '../components/shared/LoadingState';
 
 const SENTENCES_PER_RANGE = 100;
 
@@ -148,7 +147,7 @@ export function SentenceLibraryScreen({
         <section className="library-range">
           <div className="library-range__header">
             <AppButton variant="ghost" onClick={showRanges}>
-              ← Back 
+              ← Sentence ranges
             </AppButton>
             <div className="library-range__actions">
               <AppButton

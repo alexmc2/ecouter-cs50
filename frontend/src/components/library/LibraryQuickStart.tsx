@@ -1,6 +1,5 @@
-
-import { AppButton } from "../shared/AppButton";
-import { AppCard } from "../shared/AppCard";
+import { AppButton } from '../shared/AppButton';
+import { AppCard } from '../shared/AppCard';
 
 interface LibraryQuickStartProps {
   runSize: number;
@@ -13,7 +12,7 @@ export function LibraryQuickStart({
   runSize,
   disabled = false,
   onRunSizeChange,
-  onPlay
+  onPlay,
 }: LibraryQuickStartProps) {
   return (
     <AppCard className="library-quick-start">
@@ -23,7 +22,7 @@ export function LibraryQuickStart({
         {[10, 20, 50, 100].map((size) => (
           <button
             key={size}
-            className={`pill ${runSize === size ? "pill--active" : ""}`}
+            className={`pill ${runSize === size ? 'pill--active' : ''}`}
             onClick={() => onRunSizeChange(size)}
           >
             {size}
