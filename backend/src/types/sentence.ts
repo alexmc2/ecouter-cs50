@@ -22,6 +22,8 @@ export interface SentenceRange {
   startPosition: number;
   endPosition: number;
   sentenceCount: number;
+  firstFrText: string;
+  lastFrText: string;
   minEnCharLength: number;
   maxEnCharLength: number;
 }

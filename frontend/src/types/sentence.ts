@@ -18,10 +18,12 @@ export interface Sentence {
 }
 
 export interface SentenceRange {
-  page: number;
+  rangeNumber: number;
   startPosition: number;
   endPosition: number;
   sentenceCount: number;
+  firstFrText: string;
+  lastFrText: string;
   minEnCharLength: number;
   maxEnCharLength: number;
 }

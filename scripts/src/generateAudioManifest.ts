@@ -6,12 +6,34 @@ interface Sentence {
   id: number;
 }
 
+const DEFAULT_AUDIO_ID_WIDTH = 6;
+
+function envValue(name: string): string | undefined {
+  const value = process.env[name];
+  return value && value.length > 0 ? value : undefined;
+}
+
+function audioIdWidth(): number {
+  const rawWidth = envValue('AUDIO_ID_WIDTH') ?? envValue('R2_AUDIO_ID_WIDTH');
+  const width = rawWidth ? Number.parseInt(rawWidth, 10) : DEFAULT_AUDIO_ID_WIDTH;
+
+  if (!Number.isFinite(width) || width < 1) {
+    return DEFAULT_AUDIO_ID_WIDTH;
+  }
+
+  return width;
+}
+
+function audioFilename(id: number, suffix: string): string {
+  return `${String(id).padStart(audioIdWidth(), '0')}_${suffix}.wav`;
+}
+
 function expectedFiles(id: number) {
   return {
-    fr_female: `fr_f/${id}_fr_f.wav`,
-    fr_male: `fr_m/${id}_fr_m.wav`,
-    en_female: `en_f/${id}_en_f.wav`,
-    en_male: `en_m/${id}_en_m.wav`,
+    fr_female: `fr_f/${audioFilename(id, 'fr_f')}`,
+    fr_male: `fr_m/${audioFilename(id, 'fr_m')}`,
+    en_female: `en_f/${audioFilename(id, 'en_f')}`,
+    en_male: `en_m/${audioFilename(id, 'en_m')}`,
   };
 }
 
