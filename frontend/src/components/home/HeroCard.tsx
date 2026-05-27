@@ -1,4 +1,3 @@
-
 import { AppButton } from '../shared/AppButton';
 import { AppCard } from '../shared/AppCard';
 
@@ -15,8 +14,8 @@ export function HeroCard({
 }: HeroCardProps) {
   return (
     <AppCard className="home-hero">
-      <h1>Train your French ear through repetition.</h1>
-      <p>Turn spoken French from a blur into recognisable sounds.</p>
+      <h1>Learn to understand spoken French through repetition.</h1>
+      <p>Ecouter helps you turn spoken French from a blur into recognisable sounds.</p>
       <div className="home-hero__actions">
         <AppButton
           variant="primary"

@@ -1,27 +1,37 @@
-import sentencesJson from '../data/sentences.json';
+import fs from 'node:fs';
+import path from 'node:path';
 import type { PaginatedResponse } from '../types/api';
 import type {
-  SourceSentence,
   Sentence,
   SentenceRange,
 } from '../types/sentence';
-import { mapSourceSentence } from '../utils/mapSentence';
 import { paginateItems } from '../utils/pagination';
 import { buildSentenceRanges } from './sentenceRangeService';
 
-// loads the source sentences from the master json file (sentences.json) and maps the data for the controller. 
-
-const sourceSentences = sentencesJson as SourceSentence[];
+// the sentence service is responsible for loading and providing access to the sentence library data.
 
 let cachedSentences: Sentence[] | null = null;
 
-// Maps the source sentences to the Sentence type.
+function getDefaultSentenceLibraryPath(): string {
+  const candidates = [
+    path.resolve(process.cwd(), '../data/processed/sentences.app.json'),
+    path.resolve(process.cwd(), 'data/processed/sentences.app.json'),
+  ];
+
+  return candidates.find((candidate) => fs.existsSync(candidate)) ?? candidates[0];
+}
+
+function getSentenceLibraryPath(): string {
+  return process.env.SENTENCE_LIBRARY_PATH ?? getDefaultSentenceLibraryPath();
+}
+
+function loadSentences(): Sentence[] {
+  return JSON.parse(fs.readFileSync(getSentenceLibraryPath(), 'utf8')) as Sentence[];
+}
+
 export function getAllSentences(): Sentence[] {
-  // Caches the mapped sentences so that they aren't reloaded on every request.
   if (!cachedSentences) {
-    cachedSentences = sourceSentences.map((sentence, index) =>
-      mapSourceSentence(sentence, index),
-    );
+    cachedSentences = loadSentences();
   }
 
   return cachedSentences;

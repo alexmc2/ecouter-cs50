@@ -1,3 +1,4 @@
+import type { AudioSource } from '../types/listeningProfile';
 import type { Sentence } from '../types/sentence';
 
 export interface AudioSourceConfig {
@@ -33,4 +34,4 @@ export const AUDIO_SOURCE_CONFIG = {
     shortLabel: 'EN M',
     sentenceField: 'enMaleAudioUrl',
   },
-};
+} as const satisfies Record<AudioSource, AudioSourceConfig>;

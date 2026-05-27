@@ -25,17 +25,21 @@ describe('sentence service', () => {
     });
   });
 
-  it('adds local audio URLs from the stable sentence ID', () => {
+  it('loads Cloudflare R2 audio URLs from the processed library', () => {
     const firstSentence = getAllSentences()[0];
 
-    expect(firstSentence.frFemaleAudioUrl).toBe(
-      '/api/audio/fr_f/3000_fr_f.wav',
+    expect(firstSentence.frFemaleAudioUrl).toMatch(
+      /^https:\/\/.+\/fr_f\/003000_fr_f\.wav$/,
     );
-    expect(firstSentence.frMaleAudioUrl).toBe('/api/audio/fr_m/3000_fr_m.wav');
-    expect(firstSentence.enFemaleAudioUrl).toBe(
-      '/api/audio/en_f/3000_en_f.wav',
+    expect(firstSentence.frMaleAudioUrl).toMatch(
+      /^https:\/\/.+\/fr_m\/003000_fr_m\.wav$/,
     );
-    expect(firstSentence.enMaleAudioUrl).toBe('/api/audio/en_m/3000_en_m.wav');
+    expect(firstSentence.enFemaleAudioUrl).toMatch(
+      /^https:\/\/.+\/en_f\/003000_en_f\.wav$/,
+    );
+    expect(firstSentence.enMaleAudioUrl).toMatch(
+      /^https:\/\/.+\/en_m\/003000_en_m\.wav$/,
+    );
   });
 
   it('adds French preview text to sentence ranges', () => {
