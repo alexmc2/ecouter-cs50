@@ -1,0 +1,20 @@
+.screen-heading {
+  margin-bottom: 26px;
+}
+
+.screen-heading h1 {
+  color: var(--color-text);
+  font-family: var(--font-display);
+  font-size: clamp(2.3rem, 6vw, 3.25rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.screen-heading p {
+  max-width: 590px;
+  margin-top: 10px;
+  color: var(--color-text-muted);
+  font-size: 0.92rem;
+  line-height: 1.7;
+}

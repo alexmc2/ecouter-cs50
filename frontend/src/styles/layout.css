@@ -1,3 +1,5 @@
+/* AI helped to implement the layout and navigation styles */
+
 .app-shell {
   display: flex;
   min-height: 100dvh;
@@ -8,3 +10,112 @@
   min-width: 0;
 }
 
+.desktop-nav {
+  position: sticky;
+  top: 0;
+  width: 250px;
+  min-height: 100dvh;
+  padding: 32px 24px;
+  border-right: 1px solid var(--color-border);
+  background: var(--color-panel);
+  box-shadow: 18px 0 44px rgba(0, 0, 0, 0.18);
+  backdrop-filter: blur(28px) saturate(140%);
+}
+
+.desktop-nav__header {
+  margin-bottom: 42px;
+}
+
+.app-logo {
+  color: var(--color-accent);
+  font-family: var(--font-display);
+  font-size: 2.65rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.app-logo--compact {
+  font-size: 1.75rem;
+}
+
+.app-tagline {
+  margin-top: 6px;
+  color: var(--color-text-muted);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.desktop-nav__links {
+  display: grid;
+  gap: 4px;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-control);
+  background: transparent;
+  color: var(--color-text-muted);
+  padding: 12px 14px;
+  text-align: left;
+}
+
+.nav-link--active {
+  border-color: var(--color-accent-line);
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+.bottom-nav {
+  position: fixed;
+  z-index: 40;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-around;
+  border-top: 1px solid var(--color-border);
+  background: var(--color-panel);
+  padding: 8px 0 calc(env(safe-area-inset-bottom) + 8px);
+  backdrop-filter: blur(28px) saturate(140%);
+}
+
+.bottom-nav__item {
+  display: grid;
+  min-width: 74px;
+  justify-items: center;
+  gap: 2px;
+  background: transparent;
+  color: var(--color-text-faint);
+  font-size: 0.72rem;
+}
+
+.bottom-nav__item span {
+  font-size: 1.15rem;
+}
+
+.bottom-nav__item--active {
+  color: var(--color-accent);
+  font-weight: 800;
+}
+
+.screen {
+  width: min(100%, 1040px);
+  min-height: 100dvh;
+  margin: 0 auto;
+  padding: 52px var(--space-page-x);
+  animation: fade-in 0.35s ease both;
+}
+
+@media (max-width: 959px) {
+  .screen {
+    min-height: auto;
+    padding-top: 34px;
+    padding-bottom: 104px;
+  }
+}
