@@ -26,16 +26,12 @@ describe('sentence service', () => {
     const firstSentence = getAllSentences()[0];
 
     expect(firstSentence.frFemaleAudioUrl).toBe(
-      '/api/audio/fr_f_complete/3000_fr_f.wav',
+      '/api/audio/fr_f/3000_fr_f.wav',
     );
-    expect(firstSentence.frMaleAudioUrl).toBe(
-      '/api/audio/fr_m_complete/3000_fr_m.wav',
-    );
+    expect(firstSentence.frMaleAudioUrl).toBe('/api/audio/fr_m/3000_fr_m.wav');
     expect(firstSentence.enFemaleAudioUrl).toBe(
-      '/api/audio/en_f_complete/3000_en_f.wav',
+      '/api/audio/en_f/3000_en_f.wav',
     );
-    expect(firstSentence.enMaleAudioUrl).toBe(
-      '/api/audio/en_m_complete/3000_en_m.wav',
-    );
+    expect(firstSentence.enMaleAudioUrl).toBe('/api/audio/en_m/3000_en_m.wav');
   });
 });

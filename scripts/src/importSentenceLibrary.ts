@@ -27,10 +27,10 @@ const appSentences = sourceSentences.map((sentence, index) => ({
   enText: sentence.eng,
   enCharLength: sentence.char_count,
   position: index + 1,
-  frFemaleAudioUrl: audioUrl(sentence.id, 'fr_f_complete', 'fr_f'),
-  frMaleAudioUrl: audioUrl(sentence.id, 'fr_m_complete', 'fr_m'),
-  enFemaleAudioUrl: audioUrl(sentence.id, 'en_f_complete', 'en_f'),
-  enMaleAudioUrl: audioUrl(sentence.id, 'en_m_complete', 'en_m'),
+  frFemaleAudioUrl: audioUrl(sentence.id, 'fr_f', 'fr_f'),
+  frMaleAudioUrl: audioUrl(sentence.id, 'fr_m', 'fr_m'),
+  enFemaleAudioUrl: audioUrl(sentence.id, 'en_f', 'en_f'),
+  enMaleAudioUrl: audioUrl(sentence.id, 'en_m', 'en_m'),
 }));
 
 fs.writeFileSync(outputPath, `${JSON.stringify(appSentences, null, 2)}\n`);

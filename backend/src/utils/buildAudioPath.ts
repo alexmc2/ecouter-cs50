@@ -1,11 +1,7 @@
 import type { AudioSource } from '../types/listeningProfile';
 
 // This file contains the utility functions for building the file paths and URLs for audio files.
-export type VoiceFolderName =
-  | 'fr_f_complete'
-  | 'fr_m_complete'
-  | 'en_f_complete'
-  | 'en_m_complete';
+export type VoiceFolderName = 'fr_f' | 'fr_m' | 'en_f' | 'en_m';
 
 interface AudioSourceDefinition {
   folder: VoiceFolderName;
@@ -17,19 +13,19 @@ export const AUDIO_SOURCE_DEFINITIONS: Record<
   AudioSourceDefinition
 > = {
   fr_female: {
-    folder: 'fr_f_complete',
+    folder: 'fr_f',
     suffix: 'fr_f',
   },
   fr_male: {
-    folder: 'fr_m_complete',
+    folder: 'fr_m',
     suffix: 'fr_m',
   },
   en_female: {
-    folder: 'en_f_complete',
+    folder: 'en_f',
     suffix: 'en_f',
   },
   en_male: {
-    folder: 'en_m_complete',
+    folder: 'en_m',
     suffix: 'en_m',
   },
 };
@@ -55,6 +51,6 @@ export function buildAudioUrl(
   const definition = AUDIO_SOURCE_DEFINITIONS[audioSource];
   const filename = buildAudioFilename(sentenceId, audioSource);
 
-  // Returns the full URL for the audio file - for example: /api/audio/fr_f_complete/100001_fr_f.wav
+  // Returns the full URL for the audio file - for example: /api/audio/fr_f/100001_fr_f.wav
   return `/api/audio/${definition.folder}/${filename}`;
 }

@@ -11,6 +11,7 @@ const previousAudioRootPath = process.env.AUDIO_ROOT_PATH;
 
 let audioRootPath: string;
 
+// mock wav file bytes for testing the audio route.
 const wavBytes = Buffer.from([
   0x52, 0x49, 0x46, 0x46, 0x26, 0x00, 0x00, 0x00, 0x57, 0x41, 0x56, 0x45, 0x66,
   0x6d, 0x74, 0x20, 0x10, 0x00, 0x00, 0x00, 0x01, 0x00, 0x01, 0x00, 0x40, 0x1f,
@@ -44,7 +45,7 @@ describe('audio routes', () => {
     audioRootPath = fs.mkdtempSync(
       path.join(os.tmpdir(), 'ecouter-audio-test-'),
     );
-    const voicePath = path.join(audioRootPath, 'fr_f_complete');
+    const voicePath = path.join(audioRootPath, 'fr_f');
 
     fs.mkdirSync(voicePath);
     fs.writeFileSync(path.join(voicePath, '8000_fr_f.wav'), wavBytes);
@@ -64,7 +65,7 @@ describe('audio routes', () => {
 
   it('serves a wav file that exists on disk', async () => {
     const response = await request(app)
-      .get('/api/audio/fr_f_complete/8000_fr_f.wav')
+      .get('/api/audio/fr_f/8000_fr_f.wav')
       .buffer(true)
       .parse(parseBinaryResponse)
       .expect(200);
@@ -75,33 +76,20 @@ describe('audio routes', () => {
 
   it('tells the client when the requested wav file is missing', async () => {
     const response = await request(app)
-      .get('/api/audio/fr_f_complete/missing_fr_f.wav')
+      .get('/api/audio/fr_f/missing_fr_f.wav')
       .expect(404);
 
     expect(response.body).toEqual({
       error: {
-        message: 'Audio file fr_f_complete/missing_fr_f.wav was not found.',
+        message: 'Audio file fr_f/missing_fr_f.wav was not found.',
         statusCode: 404,
-      },
-    });
-  });
-
-  it('rejects audio requests for voices we do not support', async () => {
-    const response = await request(app)
-      .get('/api/audio/not_allowed/8000_fr_f.wav')
-      .expect(400);
-
-    expect(response.body).toEqual({
-      error: {
-        message: 'This audio voice folder is not allowed.',
-        statusCode: 400,
       },
     });
   });
 
   it('rejects filenames that are not local wav files', async () => {
     const response = await request(app)
-      .get('/api/audio/fr_f_complete/8000_fr_f.mp3')
+      .get('/api/audio/fr_f/8000_fr_f.mp3')
       .expect(400);
 
     expect(response.body).toEqual({

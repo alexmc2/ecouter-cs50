@@ -21,7 +21,7 @@ describe('audio path helpers', () => {
 
   it('returns the local API audio URL for a sentence ID', () => {
     expect(buildAudioUrl(8000, 'fr_female')).toBe(
-      '/api/audio/fr_f_complete/8000_fr_f.wav',
+      '/api/audio/fr_f/8000_fr_f.wav',
     );
   });
 });

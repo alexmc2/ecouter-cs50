@@ -8,10 +8,10 @@ interface Sentence {
 
 function expectedFiles(id: number) {
   return {
-    fr_female: `fr_f_complete/${id}_fr_f.wav`,
-    fr_male: `fr_m_complete/${id}_fr_m.wav`,
-    en_female: `en_f_complete/${id}_en_f.wav`,
-    en_male: `en_m_complete/${id}_en_m.wav`,
+    fr_female: `fr_f/${id}_fr_f.wav`,
+    fr_male: `fr_m/${id}_fr_m.wav`,
+    en_female: `en_f/${id}_en_f.wav`,
+    en_male: `en_m/${id}_en_m.wav`,
   };
 }
 
