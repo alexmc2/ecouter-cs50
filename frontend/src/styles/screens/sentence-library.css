@@ -143,7 +143,7 @@
   background: var(--color-accent);
 }
 
-.sentence-list-item__id {
+.sentence-list-item__position {
   color: var(--color-text-faint);
   font-size: 0.78rem;
   font-weight: 700;
