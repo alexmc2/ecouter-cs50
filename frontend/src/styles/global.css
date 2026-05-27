@@ -1,0 +1,63 @@
+html {
+  min-height: 100%;
+  background: var(--color-scene);
+}
+
+body {
+  min-height: 100%;
+  font-family: var(--font-body);
+  background: var(--color-scene);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
+}
+
+#root {
+  min-height: 100dvh;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+button {
+  border: 0;
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+button:hover {
+  opacity: 0.94;
+}
+
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+::selection {
+  background: var(--color-accent-soft);
+  color: var(--color-text);
+}
+
+.app-root {
+  min-height: 100dvh;
+  background: var(--color-scene);
+  color: var(--color-text);
+}
+
+.eyebrow {
+  color: var(--color-text-faint);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}

@@ -1,0 +1,67 @@
+:root,
+[data-theme='dark'] {
+  --font-body:
+    'Plus Jakarta Sans', 'Avenir Next', 'Segoe UI', ui-sans-serif, system-ui,
+    sans-serif;
+  --font-display:
+    'Plus Jakarta Sans', 'Avenir Next', 'Segoe UI', ui-sans-serif, system-ui,
+    sans-serif;
+  --color-bg: #030714;
+  --color-bg-alt: #01040c;
+  --color-scene: #020817;
+  --color-panel: rgba(9, 20, 38, 0.9);
+  --color-panel-soft: rgba(16, 32, 56, 0.86);
+  --color-panel-hover: rgba(27, 48, 78, 0.9);
+  --color-border: rgba(143, 167, 205, 0.18);
+  --color-border-strong: rgba(202, 242, 4, 0.42);
+  --color-text: #f3f8ff;
+  --color-text-soft: #d6e5f7;
+  --color-text-muted: #93a9c2;
+  --color-text-faint: #60758d;
+  --color-accent: #caf204;
+  --color-accent-soft: rgba(202, 242, 4, 0.095);
+  --color-accent-line: rgba(202, 242, 4, 0.26);
+  --color-accent-text: #101500;
+  --color-blue: #5fb5ff;
+  --color-sage: #39d7ba;
+  --color-lavender: #9d8cff;
+  --color-pause: #7890aa;
+  --color-danger: #ff5f7e;
+  --radius-card: 8px;
+  --radius-control: 8px;
+  --space-page-x: clamp(20px, 5vw, 56px);
+  --shadow-card:
+    0 24px 70px rgba(0, 4, 18, 0.38), inset 0 1px 0 rgba(255, 255, 255, 0.055);
+  --shadow-small:
+    0 16px 38px rgba(0, 4, 18, 0.24), inset 0 1px 0 rgba(255, 255, 255, 0.045);
+  --overlay: rgba(1, 4, 12, 0.86);
+}
+
+[data-theme='light'] {
+  --color-bg: #f5f3ef;
+  --color-bg-alt: #eceae5;
+  --color-scene: #f5f3ef;
+  --color-panel: rgba(255, 255, 252, 0.94);
+  --color-panel-soft: rgba(237, 235, 229, 0.8);
+  --color-panel-hover: rgba(228, 226, 219, 0.92);
+  --color-border: rgba(50, 48, 40, 0.1);
+  --color-border-strong: rgba(91, 58, 232, 0.3);
+  --color-text: #1a1916;
+  --color-text-soft: #2f2e28;
+  --color-text-muted: #6d6b62;
+  --color-text-faint: #9e9c92;
+  --color-accent: #5b3ae8;
+  --color-accent-soft: rgba(91, 58, 232, 0.07);
+  --color-accent-line: rgba(91, 58, 232, 0.18);
+  --color-accent-text: #ffffff;
+  --color-blue: #2a6591;
+  --color-sage: #1a7d52;
+  --color-lavender: #7b5ac0;
+  --color-pause: #7b7c71;
+  --color-danger: #c93050;
+  --shadow-card:
+    0 20px 52px rgba(50, 48, 40, 0.06), 0 1px 0 rgba(255, 255, 255, 0.8);
+  --shadow-small:
+    0 10px 26px rgba(50, 48, 40, 0.04), 0 1px 0 rgba(255, 255, 255, 0.7);
+  --overlay: rgba(245, 243, 239, 0.93);
+}
