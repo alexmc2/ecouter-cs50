@@ -1,9 +1,14 @@
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   DEFAULT_LISTENING_PROFILE,
   LISTENING_PROFILE_PRESETS,
 } from '../constants/listeningProfileDefaults';
+import {
+  createDefaultListeningProfile,
+  readListeningProfile,
+  writeListeningProfile,
+} from '../storage/listeningProfileStorage';
 import type {
   ListeningProfile,
   ListeningProfilePreset,
@@ -11,6 +16,8 @@ import type {
   ListeningProfileItemTemplate,
 } from '../types/listeningProfile';
 import { reorderArray } from '../utils/reorderArray';
+
+const CUSTOM_PROFILE_ID = 'custom-profile';
 
 function createStepId(): string {
   return `step-${Date.now()}-${Math.random().toString(16).slice(2)}`;
@@ -89,25 +96,48 @@ function normalizeBuiltInProfile(profile: ListeningProfile): ListeningProfile {
   };
 }
 
+function markAsCustomProfile(profile: ListeningProfile): ListeningProfile {
+  if (profile.id === CUSTOM_PROFILE_ID) {
+    return profile;
+  }
+
+  return {
+    ...profile,
+    id: CUSTOM_PROFILE_ID,
+    name: 'Custom profile',
+  };
+}
+
 export function useListeningProfile() {
-  const [profile, setProfile] = useState<ListeningProfile>(() => ({
-    ...DEFAULT_LISTENING_PROFILE,
-    steps: DEFAULT_LISTENING_PROFILE.steps.map(cloneStep),
-  }));
+  const [profile, setProfile] = useState<ListeningProfile>(() =>
+    readListeningProfile(),
+  );
   const activeProfile = normalizeBuiltInProfile(profile);
 
+  useEffect(() => {
+    if (activeProfile !== profile) {
+      setProfile(activeProfile);
+    }
+
+    writeListeningProfile(activeProfile);
+  }, [activeProfile, profile]);
+
   function addStep(stepTemplate: ListeningProfileItemTemplate): void {
-    setProfile((currentProfile) => ({
-      ...currentProfile,
-      steps: [...currentProfile.steps, cloneStep(stepTemplate)],
-    }));
+    setProfile((currentProfile) =>
+      markAsCustomProfile({
+        ...currentProfile,
+        steps: [...currentProfile.steps, cloneStep(stepTemplate)],
+      }),
+    );
   }
 
   function removeStep(stepId: string): void {
-    setProfile((currentProfile) => ({
-      ...currentProfile,
-      steps: currentProfile.steps.filter((step) => step.id !== stepId),
-    }));
+    setProfile((currentProfile) =>
+      markAsCustomProfile({
+        ...currentProfile,
+        steps: currentProfile.steps.filter((step) => step.id !== stepId),
+      }),
+    );
   }
 
   function duplicateStep(step: ListeningProfileItem): void {
@@ -119,7 +149,7 @@ export function useListeningProfile() {
 
       steps.splice(index + 1, 0, cloneStep(step));
 
-      return { ...currentProfile, steps };
+      return markAsCustomProfile({ ...currentProfile, steps });
     });
   }
 
@@ -139,10 +169,10 @@ export function useListeningProfile() {
         return currentProfile;
       }
 
-      return {
+      return markAsCustomProfile({
         ...currentProfile,
         steps: reorderArray(currentProfile.steps, fromIndex, toIndex),
-      };
+      });
     });
   }
 
@@ -151,10 +181,7 @@ export function useListeningProfile() {
   }
 
   function resetProfile(): void {
-    setProfile({
-      ...DEFAULT_LISTENING_PROFILE,
-      steps: DEFAULT_LISTENING_PROFILE.steps.map(cloneStep),
-    });
+    setProfile(createDefaultListeningProfile());
   }
 
   return {

@@ -1,6 +1,7 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { API_BASE_URL } from "../api/client";
+import type { LocalProgress } from "../storage/progressStorage";
 import type { CurrentRun } from "../types/currentRun";
 import type { ListeningProfile } from "../types/listeningProfile";
 import { getAudioUrlForStep } from "../utils/getAudioUrlForStep";
@@ -12,11 +13,19 @@ interface PlaybackProgress {
   isPlaying: boolean;
 }
 
-function createInitialProgress(runId: string | null): PlaybackProgress {
+function createInitialProgress(
+  runId: string | null,
+  savedProgress?: LocalProgress
+): PlaybackProgress {
+  const savedMatchesRun =
+    runId !== null && savedProgress?.currentRunId === runId;
+
   return {
     runId,
-    currentSentenceIndex: 0,
-    currentStepIndex: 0,
+    currentSentenceIndex: savedMatchesRun
+      ? savedProgress.currentSentenceIndex
+      : 0,
+    currentStepIndex: savedMatchesRun ? savedProgress.currentStepIndex : 0,
     isPlaying: false
   };
 }
@@ -55,17 +64,18 @@ function resolvePlaybackUrl(audioUrl: string): string {
 
 export function usePlaybackEngine(
   currentRun: CurrentRun | null,
-  listeningProfile: ListeningProfile
+  listeningProfile: ListeningProfile,
+  savedProgress?: LocalProgress
 ) {
   const currentRunId = currentRun?.id ?? null;
   const [storedProgress, setStoredProgress] = useState(() =>
-    createInitialProgress(currentRunId)
+    createInitialProgress(currentRunId, savedProgress)
   );
   const [loopRun, setLoopRun] = useState(true);
   const progress =
     storedProgress.runId === currentRunId
       ? storedProgress
-      : createInitialProgress(currentRunId);
+      : createInitialProgress(currentRunId, savedProgress);
 
   const sentences = currentRun?.sentences ?? [];
   const sentenceCount = sentences.length;
@@ -94,11 +104,11 @@ export function usePlaybackEngine(
       const activeProgress =
         stored.runId === currentRunId
           ? stored
-          : createInitialProgress(currentRunId);
+          : createInitialProgress(currentRunId, savedProgress);
 
       return update(clampProgress(activeProgress, sentenceCount, stepCount));
     });
-  }, [currentRunId, sentenceCount, stepCount]);
+  }, [currentRunId, savedProgress, sentenceCount, stepCount]);
 
   function togglePlaying(): void {
     updateProgress((progress) => ({

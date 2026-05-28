@@ -24,6 +24,17 @@ describe('sentence routes', () => {
     expect(response.body.limit).toBe(100);
   });
 
+  it('can start a sentence batch from an exact position', async () => {
+    const response = await request(app)
+      .get('/api/sentences?startPosition=37&limit=20')
+      .expect(200);
+
+    expect(response.body.items).toHaveLength(20);
+    expect(response.body.startPosition).toBe(37);
+    expect(response.body.endPosition).toBe(56);
+    expect(response.body.items[0].position).toBe(37);
+  });
+
   it('returns one sentence by its id', async () => {
     const response = await request(app).get('/api/sentences/46044').expect(200);
 

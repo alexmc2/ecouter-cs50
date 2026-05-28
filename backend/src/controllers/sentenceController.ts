@@ -3,6 +3,7 @@ import {
   getPaginatedSentences,
   getSentenceById,
   getSentenceRanges,
+  getSentencesFromPosition,
 } from '../services/sentenceService';
 
 function readNumberParam(value: unknown, fallback: number): number {
@@ -24,8 +25,13 @@ export function getSentences(
   try {
     const page = readNumberParam(req.query.page, 1);
     const limit = readNumberParam(req.query.limit, 100);
+    const startPosition = readNumberParam(req.query.startPosition, Number.NaN);
 
-    res.json(getPaginatedSentences(page, limit));
+    res.json(
+      Number.isFinite(startPosition)
+        ? getSentencesFromPosition(startPosition, limit)
+        : getPaginatedSentences(page, limit),
+    );
   } catch (error) {
     next(error);
   }

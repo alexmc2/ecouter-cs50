@@ -5,10 +5,20 @@ import { apiGet } from "./client";
 
 export function fetchSentences(
   page = 1,
-  limit = 100
+  limit = 100,
+  startPosition?: number,
 ): Promise<PaginatedResponse<Sentence>> {
+  const params = new URLSearchParams({
+    page: String(page),
+    limit: String(limit),
+  });
+
+  if (startPosition !== undefined) {
+    params.set('startPosition', String(startPosition));
+  }
+
   return apiGet<PaginatedResponse<Sentence>>(
-    `/api/sentences?page=${page}&limit=${limit}`
+    `/api/sentences?${params.toString()}`,
   );
 }
 

@@ -3,6 +3,7 @@ import { ProgressBar } from '../shared/ProgressBar';
 
 interface ContinueCardProps {
   lastPosition: number;
+  runSize: number;
   totalSentences: number;
   disabled?: boolean;
   onContinue: () => void;
@@ -10,6 +11,7 @@ interface ContinueCardProps {
 
 export function ContinueCard({
   lastPosition,
+  runSize,
   totalSentences,
   disabled = false,
   onContinue,
@@ -23,7 +25,9 @@ export function ContinueCard({
     >
       <div className="eyebrow">Continue</div>
       <strong>From sentence {lastPosition}</strong>
-      <span>Next 20 sentences</span>
+      <span>
+        Next {runSize} sentence{runSize === 1 ? '' : 's'}
+      </span>
       <ProgressBar value={lastPosition} max={totalSentences} />
     </AppCard>
   );

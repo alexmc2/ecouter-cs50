@@ -44,6 +44,34 @@ export function getPaginatedSentences(
   return paginateItems(getAllSentences(), page, limit);
 }
 
+export function getSentencesFromPosition(
+  startPosition: number,
+  limit: number,
+): PaginatedResponse<Sentence> {
+  const sentences = getAllSentences();
+  const pageSize =
+    Number.isFinite(limit) && limit > 0 ? Math.floor(limit) : 100;
+  const total = sentences.length;
+  const requestedPosition =
+    Number.isFinite(startPosition) && startPosition > 0
+      ? Math.floor(startPosition)
+      : 1;
+  const clampedPosition = total > 0 ? Math.min(requestedPosition, total) : 0;
+  const startIndex = Math.max(0, clampedPosition - 1);
+  const pageItems = sentences.slice(startIndex, startIndex + pageSize);
+
+  return {
+    items: pageItems,
+    page: pageSize > 0 ? Math.floor(startIndex / pageSize) + 1 : 1,
+    limit: pageSize,
+    total,
+    totalPages: Math.max(1, Math.ceil(total / pageSize)),
+    startPosition: pageItems.length === 0 ? 0 : clampedPosition,
+    endPosition:
+      pageItems.length === 0 ? 0 : clampedPosition + pageItems.length - 1,
+  };
+}
+
 // Retrieves a single sentence by its ID.
 export function getSentenceById(sentenceId: number): Sentence | undefined {
   return getAllSentences().find((sentence) => sentence.id === sentenceId);

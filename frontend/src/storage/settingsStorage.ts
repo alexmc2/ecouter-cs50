@@ -1,6 +1,10 @@
 
 import { STORAGE_KEYS } from "../constants/storageKeys";
 import type { AppSettings } from "../types/settings";
+import {
+  readLocalStorageValue,
+  writeLocalStorageValue,
+} from './localStorage';
 
 export const defaultSettings: AppSettings = {
   theme: "dark",
@@ -9,19 +13,12 @@ export const defaultSettings: AppSettings = {
 };
 
 export function readSettings(): AppSettings {
-  const storedSettings = window.localStorage.getItem(STORAGE_KEYS.settings);
-
-  if (!storedSettings) {
-    return defaultSettings;
-  }
-
-  try {
-    return { ...defaultSettings, ...(JSON.parse(storedSettings) as Partial<AppSettings>) };
-  } catch {
-    return defaultSettings;
-  }
+  return {
+    ...defaultSettings,
+    ...readLocalStorageValue<Partial<AppSettings>>(STORAGE_KEYS.settings, {}),
+  };
 }
 
 export function writeSettings(settings: AppSettings): void {
-  window.localStorage.setItem(STORAGE_KEYS.settings, JSON.stringify(settings));
+  writeLocalStorageValue(STORAGE_KEYS.settings, settings);
 }

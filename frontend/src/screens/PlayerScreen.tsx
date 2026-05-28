@@ -1,4 +1,9 @@
-import { useState } from 'react';
+import {
+  useEffect,
+  useState,
+  type Dispatch,
+  type SetStateAction,
+} from 'react';
 import { CurrentSentenceDisplay } from '../components/player/CurrentSentenceDisplay';
 import { PlaybackStepDots } from '../components/player/PlaybackStepDots';
 import { PlayerControls } from '../components/player/PlayerControls';
@@ -7,13 +12,16 @@ import { RevealControls } from '../components/player/RevealControls';
 import { AppButton } from '../components/shared/AppButton';
 import { ProgressBar } from '../components/shared/ProgressBar';
 import { usePlaybackEngine } from '../hooks/usePlaybackEngine';
+import type { LocalProgress } from '../storage/progressStorage';
 import type { CurrentRun } from '../types/currentRun';
 import type { ListeningProfile } from '../types/listeningProfile';
 
 interface PlayerScreenProps {
   currentRun: CurrentRun | null;
   listeningProfile: ListeningProfile;
+  savedProgress: LocalProgress;
   autoHideText: boolean;
+  onProgressChange: Dispatch<SetStateAction<LocalProgress>>;
   onBack: () => void;
   onChooseSet: () => void;
   onOpenProfile: () => void;
@@ -29,7 +37,9 @@ interface RevealedTextState {
 export function PlayerScreen({
   currentRun,
   listeningProfile,
+  savedProgress,
   autoHideText,
+  onProgressChange,
   onBack,
   onChooseSet,
   onOpenProfile,
@@ -40,7 +50,7 @@ export function PlayerScreen({
     english: false,
     sentenceIndex: 0,
   });
-  const playback = usePlaybackEngine(currentRun, listeningProfile);
+  const playback = usePlaybackEngine(currentRun, listeningProfile, savedProgress);
   const totalSentences = currentRun?.sentences.length ?? 0;
   const displaySentenceIndex =
     totalSentences > 0 ? playback.currentSentenceIndex + 1 : 0;
@@ -53,6 +63,39 @@ export function PlayerScreen({
     autoHideText && revealedText.sentenceIndex !== playback.currentSentenceIndex;
   const showFrench = revealIsStale ? false : revealedText.french;
   const showEnglish = revealIsStale ? false : revealedText.english;
+
+  useEffect(() => {
+    if (!currentRun || !playback.currentSentence) {
+      return;
+    }
+
+    onProgressChange((currentProgress) => {
+      const nextProgress: LocalProgress = {
+        lastPosition: playback.currentSentence?.position ?? 1,
+        currentRunId: currentRun.id,
+        currentSentenceIndex: playback.currentSentenceIndex,
+        currentStepIndex: playback.currentStepIndex,
+      };
+
+      if (
+        currentProgress.lastPosition === nextProgress.lastPosition &&
+        currentProgress.currentRunId === nextProgress.currentRunId &&
+        currentProgress.currentSentenceIndex ===
+          nextProgress.currentSentenceIndex &&
+        currentProgress.currentStepIndex === nextProgress.currentStepIndex
+      ) {
+        return currentProgress;
+      }
+
+      return nextProgress;
+    });
+  }, [
+    currentRun,
+    onProgressChange,
+    playback.currentSentence,
+    playback.currentSentenceIndex,
+    playback.currentStepIndex,
+  ]);
 
   function toggleRevealedText(language: 'french' | 'english'): void {
     setRevealedText((currentState) => {

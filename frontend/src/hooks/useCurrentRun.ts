@@ -1,8 +1,18 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import {
+  readCurrentRun,
+  writeCurrentRun,
+} from '../storage/currentRunStorage';
 import type { CurrentRun } from '../types/currentRun';
 
 export function useCurrentRun() {
-  const [currentRun, setCurrentRun] = useState<CurrentRun | null>(null);
+  const [currentRun, setCurrentRun] = useState<CurrentRun | null>(() =>
+    readCurrentRun(),
+  );
+
+  useEffect(() => {
+    writeCurrentRun(currentRun);
+  }, [currentRun]);
 
   function startRun(run: CurrentRun): void {
     setCurrentRun(run);

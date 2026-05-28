@@ -3,7 +3,12 @@ import { fetchSentences } from '../api/sentenceApi';
 import type { PaginatedResponse } from '../types/api';
 import type { Sentence } from '../types/sentence';
 
-export function useSentences(page = 1, limit = 100, enabled = false) {
+export function useSentences(
+  page = 1,
+  limit = 100,
+  enabled = false,
+  startPosition?: number,
+) {
   const [data, setData] = useState<PaginatedResponse<Sentence> | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -20,7 +25,7 @@ export function useSentences(page = 1, limit = 100, enabled = false) {
       setError(null);
 
       try {
-        const response = await fetchSentences(page, limit);
+        const response = await fetchSentences(page, limit, startPosition);
 
         if (!cancelled) {
           setData(response);
@@ -45,7 +50,7 @@ export function useSentences(page = 1, limit = 100, enabled = false) {
     return () => {
       cancelled = true;
     };
-  }, [enabled, page, limit]);
+  }, [enabled, limit, page, startPosition]);
 
   return { data, loading, error };
 }

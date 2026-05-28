@@ -2,21 +2,25 @@
 import { DEFAULT_LISTENING_PROFILE } from "../constants/listeningProfileDefaults";
 import { STORAGE_KEYS } from "../constants/storageKeys";
 import type { ListeningProfile } from "../types/listeningProfile";
+import {
+  readLocalStorageValue,
+  writeLocalStorageValue,
+} from './localStorage';
+
+export function createDefaultListeningProfile(): ListeningProfile {
+  return {
+    ...DEFAULT_LISTENING_PROFILE,
+    steps: DEFAULT_LISTENING_PROFILE.steps.map((step) => ({ ...step })),
+  };
+}
 
 export function readListeningProfile(): ListeningProfile {
-  const storedProfile = window.localStorage.getItem(STORAGE_KEYS.listeningProfile);
-
-  if (!storedProfile) {
-    return DEFAULT_LISTENING_PROFILE;
-  }
-
-  try {
-    return JSON.parse(storedProfile) as ListeningProfile;
-  } catch {
-    return DEFAULT_LISTENING_PROFILE;
-  }
+  return readLocalStorageValue(
+    STORAGE_KEYS.listeningProfile,
+    createDefaultListeningProfile(),
+  );
 }
 
 export function writeListeningProfile(profile: ListeningProfile): void {
-  window.localStorage.setItem(STORAGE_KEYS.listeningProfile, JSON.stringify(profile));
+  writeLocalStorageValue(STORAGE_KEYS.listeningProfile, profile);
 }
