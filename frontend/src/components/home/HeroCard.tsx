@@ -16,8 +16,24 @@ export function HeroCard({
     <AppCard className="home-hero">
       <h1>Learn to understand spoken French through repetition.</h1>
       <p>
-        Écouter helps you turn spoken French from a blur into recognisable
-        sounds.
+        Écouter is based on{' '}
+        <a
+          href="https://escholarship.org/uc/item/91c921b9"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ color: '#caf204', textDecoration: 'none' }}
+        >
+          research
+        </a>{' '}
+        into second-language listening which shows that learners often struggle
+        not because they do not know the words, but because they cannot reliably
+        recognise them in fluent speech.
+      </p>
+      <p>
+        Using short repeated sentences, pauses, and optional text reveals,
+        Écouter is designed to help learners practise aural decoding:
+        identifying sounds, word boundaries, and known words in connected
+        speech.
       </p>
       <div className="home-hero__actions">
         <AppButton
