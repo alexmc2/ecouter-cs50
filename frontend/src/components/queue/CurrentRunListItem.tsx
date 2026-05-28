@@ -19,7 +19,10 @@ export function CurrentRunListItem({
         <b>{sentence.frText}</b>
         <small>{sentence.enText}</small>
       </span>
-      <button onClick={() => onRemove(sentence.id)} aria-label={`Remove sentence ${sentence.id}`}>
+      <button
+        onClick={() => onRemove(sentence.id)}
+        aria-label={`Remove sentence ${index + 1}`}
+      >
         ×
       </button>
     </div>

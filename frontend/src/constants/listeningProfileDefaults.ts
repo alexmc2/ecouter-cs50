@@ -42,6 +42,9 @@ function repeatedFrenchWithTranslation(
   }
 
   steps.push(audioStep(englishSource));
+  steps.push(pauseStep(pauseMs));
+  steps.push(audioStep(frenchSource));
+  steps.push(pauseStep(pauseMs));
 
   return steps;
 }
@@ -61,25 +64,25 @@ export const LISTENING_PROFILE_PRESETS: ListeningProfilePreset[] = [
   {
     id: "male-five-translate",
     name: "Male 5x + translation",
-    description: "French male five times, 3s gaps, English male",
+    description: "French male five times, English male, French male, then pause",
     steps: repeatedFrenchWithTranslation("fr_male", "en_male", 5, 3000),
   },
   {
     id: "female-five-translate",
     name: "Female 5x + translation",
-    description: "French female five times, 3s gaps, English female",
+    description: "French female five times, English female, French female, then pause",
     steps: repeatedFrenchWithTranslation("fr_female", "en_female", 5, 3000),
   },
   {
     id: "male-three-translate",
     name: "Male 3x + translation",
-    description: "French male three times, 2s gaps, English male",
+    description: "French male three times, English male, French male, then pause",
     steps: repeatedFrenchWithTranslation("fr_male", "en_male", 3, 2000),
   },
   {
     id: "female-three-translate",
     name: "Female 3x + translation",
-    description: "French female three times, 2s gaps, English female",
+    description: "French female three times, English female, French female, then pause",
     steps: repeatedFrenchWithTranslation("fr_female", "en_female", 3, 2000),
   },
 ];

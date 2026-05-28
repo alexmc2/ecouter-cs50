@@ -1,5 +1,4 @@
-
-import { AppButton } from "../shared/AppButton";
+import { AppButton } from '../shared/AppButton';
 
 interface PlayerHeaderProps {
   queueCount: number;
@@ -12,7 +11,7 @@ export function PlayerHeader({
   queueCount,
   onBack,
   onOpenQueue,
-  onOpenProfile
+  onOpenProfile,
 }: PlayerHeaderProps) {
   return (
     <header className="player-header">

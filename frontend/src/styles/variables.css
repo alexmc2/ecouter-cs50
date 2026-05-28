@@ -38,7 +38,7 @@
 }
 
 [data-theme='light'] {
-  --color-bg: #f5f3ef;
+  --color-bg: #fafafa;
   --color-bg-alt: #eceae5;
   --color-scene: #f5f3ef;
   --color-panel: rgba(255, 255, 252, 0.94);

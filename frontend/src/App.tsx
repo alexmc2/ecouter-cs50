@@ -3,25 +3,66 @@ import { AppShell } from './components/layout/AppShell';
 import { ListeningProfileBuilder } from './components/listening-profile/ListeningProfileBuilder';
 import { CurrentRunPanel } from './components/queue/CurrentRunPanel';
 import { SCREENS, type ScreenId } from './constants/routes';
+import { STORAGE_KEYS } from './constants/storageKeys';
 import { useCurrentRun } from './hooks/useCurrentRun';
 import { useListeningProfile } from './hooks/useListeningProfile';
+import { useLocalStorage } from './hooks/useLocalStorage';
 import { useSentences } from './hooks/useSentences';
 import { HomeScreen } from './screens/HomeScreen';
 import { PlayerScreen } from './screens/PlayerScreen';
 import { SentenceLibraryScreen } from './screens/SentenceLibraryScreen';
+import { SettingsScreen } from './screens/SettingsScreen';
 import type { CurrentRun } from './types/currentRun';
+import type { AppSettings, ThemeName } from './types/settings';
 import { createStarterCurrentRun } from './utils/createCurrentRun';
+
+const DEFAULT_SETTINGS: AppSettings = {
+  theme: 'dark',
+  defaultRunSize: 20,
+  autoHideText: true,
+};
 
 export function App() {
   const [screen, setScreen] = useState<ScreenId>(SCREENS.HOME);
+  const [settings, setSettings] = useLocalStorage<AppSettings>(
+    STORAGE_KEYS.settings,
+    DEFAULT_SETTINGS,
+  );
+  const activeSettings = {
+    ...DEFAULT_SETTINGS,
+    ...settings,
+  };
   const [showProfileBuilder, setShowProfileBuilder] = useState(false);
   const [showQueue, setShowQueue] = useState(false);
-  const defaultRunSize = 20;
   const { currentRun, startRun, removeSentenceFromRun } = useCurrentRun();
   const listeningProfile = useListeningProfile();
-  const starterSentences = useSentences(1, defaultRunSize, true);
+  const starterSentences = useSentences(1, activeSettings.defaultRunSize, true);
   const lastPosition = 1;
   const totalSentences = starterSentences.data?.total ?? 0;
+
+  function setTheme(theme: ThemeName): void {
+    setSettings((currentSettings) => ({
+      ...DEFAULT_SETTINGS,
+      ...currentSettings,
+      theme,
+    }));
+  }
+
+  function setDefaultRunSize(defaultRunSize: number): void {
+    setSettings((currentSettings) => ({
+      ...DEFAULT_SETTINGS,
+      ...currentSettings,
+      defaultRunSize,
+    }));
+  }
+
+  function setAutoHideText(autoHideText: boolean): void {
+    setSettings((currentSettings) => ({
+      ...DEFAULT_SETTINGS,
+      ...currentSettings,
+      autoHideText,
+    }));
+  }
 
   function openRun(run: CurrentRun): void {
     startRun(run);
@@ -34,7 +75,10 @@ export function App() {
     }
 
     openRun(
-      createStarterCurrentRun(starterSentences.data.items, defaultRunSize),
+      createStarterCurrentRun(
+        starterSentences.data.items,
+        activeSettings.defaultRunSize,
+      ),
     );
   }
 
@@ -57,26 +101,25 @@ export function App() {
       <PlayerScreen
         currentRun={currentRun}
         listeningProfile={listeningProfile.profile}
+        autoHideText={activeSettings.autoHideText}
         onBack={() => setScreen(SCREENS.HOME)}
+        onChooseSet={() => setScreen(SCREENS.LIBRARY)}
         onOpenProfile={() => setShowProfileBuilder(true)}
         onOpenQueue={() => setShowQueue(true)}
       />
     ) : (
-      <HomeScreen
-        lastPosition={lastPosition}
-        totalSentences={totalSentences}
-        startListeningDisabled={
-          starterSentences.loading ||
-          Boolean(starterSentences.error) ||
-          !starterSentences.data?.items.length
-        }
-        onStartListening={startListening}
-        onBrowseSentences={() => setScreen(SCREENS.LIBRARY)}
+      <SettingsScreen
+        theme={activeSettings.theme}
+        onThemeChange={setTheme}
+        defaultRunSize={activeSettings.defaultRunSize}
+        onDefaultRunSizeChange={setDefaultRunSize}
+        autoHideText={activeSettings.autoHideText}
+        onAutoHideTextChange={setAutoHideText}
       />
     );
 
   return (
-    <div className="app-root" data-theme="dark">
+    <div className="app-root" data-theme={activeSettings.theme}>
       {screen === SCREENS.PLAYER ? (
         appContent
       ) : (
@@ -107,5 +150,3 @@ export function App() {
     </div>
   );
 }
-
-export default App;

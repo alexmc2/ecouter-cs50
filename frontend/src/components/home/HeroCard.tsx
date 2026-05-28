@@ -15,7 +15,10 @@ export function HeroCard({
   return (
     <AppCard className="home-hero">
       <h1>Learn to understand spoken French through repetition.</h1>
-      <p>Ecouter helps you turn spoken French from a blur into recognisable sounds.</p>
+      <p>
+        Écouter helps you turn spoken French from a blur into recognisable
+        sounds.
+      </p>
       <div className="home-hero__actions">
         <AppButton
           variant="primary"

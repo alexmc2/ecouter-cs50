@@ -33,11 +33,68 @@ function profileFromPreset(preset: ListeningProfilePreset): ListeningProfile {
   };
 }
 
+function stepsMatch(
+  step: ListeningProfileItem,
+  template: ListeningProfileItem | ListeningProfileItemTemplate,
+): boolean {
+  if (step.type !== template.type) {
+    return false;
+  }
+
+  if (step.type === 'pause' && template.type === 'pause') {
+    return step.durationMs === template.durationMs;
+  }
+
+  if (step.type === 'audio' && template.type === 'audio') {
+    return step.source === template.source;
+  }
+
+  return false;
+}
+
+function getBuiltInSteps(
+  profile: ListeningProfile,
+): Array<ListeningProfileItem | ListeningProfileItemTemplate> | null {
+  if (profile.id === DEFAULT_LISTENING_PROFILE.id) {
+    return DEFAULT_LISTENING_PROFILE.steps;
+  }
+
+  return (
+    LISTENING_PROFILE_PRESETS.find((preset) => preset.id === profile.id)
+      ?.steps ?? null
+  );
+}
+
+function normalizeBuiltInProfile(profile: ListeningProfile): ListeningProfile {
+  const builtInSteps = getBuiltInSteps(profile);
+
+  if (!builtInSteps || profile.steps.length >= builtInSteps.length) {
+    return profile;
+  }
+
+  const matchesCurrentPrefix = profile.steps.every((step, index) =>
+    stepsMatch(step, builtInSteps[index]),
+  );
+
+  if (!matchesCurrentPrefix) {
+    return profile;
+  }
+
+  return {
+    ...profile,
+    steps: [
+      ...profile.steps,
+      ...builtInSteps.slice(profile.steps.length).map(cloneStep),
+    ],
+  };
+}
+
 export function useListeningProfile() {
   const [profile, setProfile] = useState<ListeningProfile>(() => ({
     ...DEFAULT_LISTENING_PROFILE,
     steps: DEFAULT_LISTENING_PROFILE.steps.map(cloneStep),
   }));
+  const activeProfile = normalizeBuiltInProfile(profile);
 
   function addStep(stepTemplate: ListeningProfileItemTemplate): void {
     setProfile((currentProfile) => ({
@@ -101,7 +158,7 @@ export function useListeningProfile() {
   }
 
   return {
-    profile,
+    profile: activeProfile,
     presets: LISTENING_PROFILE_PRESETS,
     addStep,
     removeStep,
