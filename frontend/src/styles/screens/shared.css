@@ -18,3 +18,19 @@
   font-size: 0.92rem;
   line-height: 1.7;
 }
+
+@media (max-width: 640px) {
+  .screen-heading {
+    margin-bottom: 22px;
+  }
+
+  .screen-heading h1 {
+    font-size: clamp(2rem, 12vw, 2.7rem);
+    overflow-wrap: anywhere;
+  }
+
+  .screen-heading p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+}

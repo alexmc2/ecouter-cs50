@@ -142,7 +142,8 @@
   background: var(--color-accent);
 }
 
-.sentence-list-item__id {
+.sentence-list-item__id,
+.sentence-list-item__position {
   color: var(--color-text-faint);
   font-size: 0.78rem;
   font-weight: 700;
@@ -173,16 +174,98 @@
 }
 
 @media (max-width: 759px) {
+  .library-quick-start {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: stretch;
+    padding: 16px;
+  }
+
+  .library-quick-start > span {
+    margin-top: -4px;
+  }
+
+  .library-quick-start .pill-group {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .library-quick-start .pill {
+    width: 100%;
+    padding-inline: 8px;
+    text-align: center;
+  }
+
+  .library-quick-start .app-button {
+    width: 100%;
+  }
+
+  .selection-toolbar,
+  .selection-toolbar div,
+  .library-range__header,
+  .library-range__actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: stretch;
+  }
+
+  .selection-toolbar .app-button,
+  .library-range__actions .app-button {
+    width: 100%;
+  }
+
   .library-range-grid {
     grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .sentence-range-card {
+    display: grid;
+    gap: 14px;
+    padding: 18px;
+  }
+
+  .sentence-range-card strong {
+    font-size: 1.18rem;
+    line-height: 1.15;
+  }
+
+  .sentence-range-card .range-chip {
+    justify-self: start;
   }
 
   .sentence-list-item {
-    grid-template-columns: auto 38px minmax(0, 1fr);
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 10px;
+    padding: 12px 0;
+  }
+
+  .sentence-list-item__position {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: start;
+    color: var(--color-text-faint);
+    font-size: 0.72rem;
+    font-weight: 800;
+  }
+
+  .sentence-list-item__text {
+    grid-column: 2;
+  }
+
+  .sentence-list-item__text strong,
+  .sentence-list-item__text small {
+    white-space: normal;
   }
 
   .sentence-list-item .app-button {
-    grid-column: 3;
+    grid-column: 2;
     justify-self: start;
+  }
+}
+
+@media (max-width: 380px) {
+  .library-quick-start .pill-group {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }

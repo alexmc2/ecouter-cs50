@@ -14,6 +14,10 @@ export function HeroCard({
 }: HeroCardProps) {
   return (
     <AppCard className="home-hero">
+      <div className="home-hero__brand" aria-label="écouter">
+        <div className="app-logo app-logo--compact">écouter</div>
+        <div className="app-tagline">French Listening Trainer</div>
+      </div>
       <h1>Learn to understand spoken French through repetition.</h1>
       <p>
         Écouter is based on{' '}

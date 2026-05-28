@@ -118,6 +118,16 @@ export function usePlaybackEngine(
     }));
   }
 
+  function moveToStep(index: number): void {
+    const nextIndex = Math.max(0, Math.min(stepCount - 1, index));
+
+    updateProgress((progress) => ({
+      ...progress,
+      currentStepIndex: nextIndex,
+      isPlaying: progress.isPlaying && canPlay
+    }));
+  }
+
   const stopPlayback = useCallback(() => {
     updateProgress((progress) => ({
       ...progress,
@@ -238,6 +248,7 @@ export function usePlaybackEngine(
     togglePlaying,
     setLoopRun,
     moveToSentence,
+    moveToStep,
     advancePlayback
   };
 }

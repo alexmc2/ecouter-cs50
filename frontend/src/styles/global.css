@@ -1,12 +1,15 @@
 html {
   min-height: 100%;
+  overflow-x: hidden;
   overflow-y: scroll;
   scrollbar-gutter: stable both-edges;
   background: var(--color-scene);
 }
 
 body {
+  width: 100%;
   min-height: 100%;
+  overflow-x: hidden;
   font-family: var(--font-body);
   background: var(--color-scene);
   color: var(--color-text);

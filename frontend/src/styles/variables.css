@@ -27,6 +27,17 @@
   --color-lavender: #9d8cff;
   --color-pause: #7890aa;
   --color-danger: #ff5f7e;
+  --player-card-background: #111827;
+  --player-card-border: rgba(202, 242, 4, 0.24);
+  --player-card-glow: rgba(202, 242, 4, 0.045);
+  --player-card-shadow: rgba(0, 0, 0, 0.22);
+  --reveal-card-bg: rgba(3, 7, 20, 0.62);
+  --reveal-card-bg-active: rgba(15, 29, 54, 0.82);
+  --reveal-card-border: rgba(202, 242, 4, 0.26);
+  --reveal-card-border-hover: rgba(202, 242, 4, 0.38);
+  --reveal-card-border-active: rgba(202, 242, 4, 0.42);
+  --reveal-card-glow: rgba(202, 242, 4, 0.04);
+  --reveal-card-shadow: rgba(0, 0, 0, 0.18);
   --radius-card: 8px;
   --radius-control: 8px;
   --space-page-x: clamp(20px, 5vw, 56px);
@@ -59,6 +70,17 @@
   --color-lavender: #7b5ac0;
   --color-pause: #7b7c71;
   --color-danger: #c93050;
+  --player-card-background: rgba(255, 255, 252, 0.94);
+  --player-card-border: rgba(91, 58, 232, 0.22);
+  --player-card-glow: rgba(91, 58, 232, 0.035);
+  --player-card-shadow: rgba(50, 48, 40, 0.08);
+  --reveal-card-bg: rgba(255, 255, 252, 0.78);
+  --reveal-card-bg-active: rgba(246, 244, 255, 0.9);
+  --reveal-card-border: rgba(91, 58, 232, 0.16);
+  --reveal-card-border-hover: rgba(91, 58, 232, 0.3);
+  --reveal-card-border-active: rgba(91, 58, 232, 0.24);
+  --reveal-card-glow: rgba(91, 58, 232, 0.025);
+  --reveal-card-shadow: rgba(50, 48, 40, 0.055);
   --shadow-card:
     0 20px 52px rgba(50, 48, 40, 0.06), 0 1px 0 rgba(255, 255, 255, 0.8);
   --shadow-small:

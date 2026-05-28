@@ -1,16 +1,12 @@
 import { AppButton } from '../shared/AppButton';
 
 interface PlayerHeaderProps {
-  queueCount: number;
   onBack: () => void;
-  onOpenQueue: () => void;
   onOpenProfile: () => void;
 }
 
 export function PlayerHeader({
-  queueCount,
   onBack,
-  onOpenQueue,
   onOpenProfile,
 }: PlayerHeaderProps) {
   return (
@@ -19,7 +15,6 @@ export function PlayerHeader({
         ← Back
       </AppButton>
       <div className="player-header__actions">
-        <AppButton onClick={onOpenQueue}>Queue ({queueCount})</AppButton>
         <AppButton variant="primary" onClick={onOpenProfile}>
           Listening Profile
         </AppButton>

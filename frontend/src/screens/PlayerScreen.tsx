@@ -42,6 +42,13 @@ export function PlayerScreen({
   });
   const playback = usePlaybackEngine(currentRun, listeningProfile);
   const totalSentences = currentRun?.sentences.length ?? 0;
+  const displaySentenceIndex =
+    totalSentences > 0 ? playback.currentSentenceIndex + 1 : 0;
+  const totalSteps = listeningProfile.steps.length;
+  const displayStepIndex = totalSteps > 0 ? playback.currentStepIndex + 1 : 0;
+  const setNumber = playback.currentSentence
+    ? Math.floor((playback.currentSentence.position - 1) / 100) + 1
+    : null;
   const revealIsStale =
     autoHideText && revealedText.sentenceIndex !== playback.currentSentenceIndex;
   const showFrench = revealIsStale ? false : revealedText.french;
@@ -74,58 +81,70 @@ export function PlayerScreen({
   return (
     <main className="player-screen">
       <PlayerHeader
-        queueCount={totalSentences}
         onBack={onBack}
-        onOpenQueue={onOpenQueue}
         onOpenProfile={onOpenProfile}
       />
-      <div className="player-screen__main">
-        <div className="player-screen__deck">
-          <CurrentSentenceDisplay
-            sentence={playback.currentSentence}
-            currentSentenceIndex={playback.currentSentenceIndex}
-            totalSentences={totalSentences}
-            currentStep={playback.currentStep}
-          />
-          <PlaybackStepDots
-            steps={listeningProfile.steps}
-            activeIndex={playback.currentStepIndex}
-            active={playback.isPlaying}
-          />
-          <RevealControls
-            frenchText={playback.currentSentence?.frText ?? null}
-            englishText={playback.currentSentence?.enText ?? null}
-            showFrench={showFrench}
-            showEnglish={showEnglish}
-            onToggleFrench={() => toggleRevealedText('french')}
-            onToggleEnglish={() => toggleRevealedText('english')}
-          />
-          <div className="player-screen__progress">
-            <ProgressBar
-              value={playback.currentSentenceIndex + 1}
-              max={Math.max(1, totalSentences)}
+      <section className="player-screen__main" aria-label="Audio player">
+        <div className="player-shell">
+          <article className="player-card">
+            <section className="now-playing" aria-live="polite">
+              <CurrentSentenceDisplay
+                currentStep={playback.currentStep}
+              />
+              <div className="profile-strip" aria-label="Listening profile">
+                <div className="profile-strip__row">
+                  <span>Listening profile</span>
+                  <span>
+                    Step {displayStepIndex} of {totalSteps}
+                  </span>
+                </div>
+                <PlaybackStepDots
+                  steps={listeningProfile.steps}
+                  activeIndex={playback.currentStepIndex}
+                  active={totalSteps > 0}
+                  onSelectStep={playback.moveToStep}
+                />
+              </div>
+            </section>
+            <RevealControls
+              frenchText={playback.currentSentence?.frText ?? null}
+              englishText={playback.currentSentence?.enText ?? null}
+              showFrench={showFrench}
+              showEnglish={showEnglish}
+              onToggleFrench={() => toggleRevealedText('french')}
+              onToggleEnglish={() => toggleRevealedText('english')}
             />
-          </div>
-          <PlayerControls
-            isPlaying={playback.isPlaying}
-            loopRun={playback.loopRun}
-            onPrevious={() =>
-              playback.moveToSentence(playback.currentSentenceIndex - 1)
-            }
-            onNext={() =>
-              playback.moveToSentence(playback.currentSentenceIndex + 1)
-            }
-            onTogglePlaying={playback.togglePlaying}
-            onToggleLoop={() => playback.setLoopRun((value) => !value)}
-          />
+            <div className="player-screen__progress">
+              <div className="player-progress__meta">
+                <span>
+                  Sentence {displaySentenceIndex} / {totalSentences}
+                </span>
+                <span>{setNumber ? `Set ${setNumber}` : 'No set loaded'}</span>
+              </div>
+              <ProgressBar
+                value={playback.currentSentenceIndex + 1}
+                max={Math.max(1, totalSentences)}
+              />
+            </div>
+            <PlayerControls
+              isPlaying={playback.isPlaying}
+              loopRun={playback.loopRun}
+              onPrevious={() =>
+                playback.moveToSentence(playback.currentSentenceIndex - 1)
+              }
+              onNext={() =>
+                playback.moveToSentence(playback.currentSentenceIndex + 1)
+              }
+              onTogglePlaying={playback.togglePlaying}
+              onToggleLoop={() => playback.setLoopRun((value) => !value)}
+            />
+          </article>
         </div>
-      </div>
-      <AppButton
-        className="player-screen__change-set"
-        onClick={onChooseSet}
-      >
-        Change Set
-      </AppButton>
+      </section>
+      <footer className="player-screen__footer">
+        <AppButton onClick={onOpenQueue}>Queue ({totalSentences})</AppButton>
+        <AppButton onClick={onChooseSet}>Change Set</AppButton>
+      </footer>
     </main>
   );
 }
