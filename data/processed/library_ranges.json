@@ -261,14 +261,14 @@
     "endPosition": 3300,
     "sentenceCount": 100,
     "minEnCharLength": 36,
-    "maxEnCharLength": 37
+    "maxEnCharLength": 36
   },
   {
     "rangeNumber": 34,
     "startPosition": 3301,
     "endPosition": 3400,
     "sentenceCount": 100,
-    "minEnCharLength": 37,
+    "minEnCharLength": 36,
     "maxEnCharLength": 37
   },
   {
@@ -301,22 +301,22 @@
     "endPosition": 3800,
     "sentenceCount": 100,
     "minEnCharLength": 40,
-    "maxEnCharLength": 41
+    "maxEnCharLength": 40
   },
   {
     "rangeNumber": 39,
     "startPosition": 3801,
     "endPosition": 3900,
     "sentenceCount": 100,
-    "minEnCharLength": 41,
-    "maxEnCharLength": 42
+    "minEnCharLength": 40,
+    "maxEnCharLength": 41
   },
   {
     "rangeNumber": 40,
     "startPosition": 3901,
     "endPosition": 4000,
     "sentenceCount": 100,
-    "minEnCharLength": 42,
+    "minEnCharLength": 41,
     "maxEnCharLength": 43
   },
   {
@@ -325,14 +325,14 @@
     "endPosition": 4100,
     "sentenceCount": 100,
     "minEnCharLength": 43,
-    "maxEnCharLength": 44
+    "maxEnCharLength": 43
   },
   {
     "rangeNumber": 42,
     "startPosition": 4101,
     "endPosition": 4200,
     "sentenceCount": 100,
-    "minEnCharLength": 44,
+    "minEnCharLength": 43,
     "maxEnCharLength": 45
   },
   {
@@ -357,38 +357,38 @@
     "endPosition": 4500,
     "sentenceCount": 100,
     "minEnCharLength": 47,
-    "maxEnCharLength": 49
+    "maxEnCharLength": 48
   },
   {
     "rangeNumber": 46,
     "startPosition": 4501,
     "endPosition": 4600,
     "sentenceCount": 100,
-    "minEnCharLength": 49,
-    "maxEnCharLength": 51
+    "minEnCharLength": 48,
+    "maxEnCharLength": 50
   },
   {
     "rangeNumber": 47,
     "startPosition": 4601,
     "endPosition": 4700,
     "sentenceCount": 100,
-    "minEnCharLength": 51,
-    "maxEnCharLength": 53
+    "minEnCharLength": 50,
+    "maxEnCharLength": 52
   },
   {
     "rangeNumber": 48,
     "startPosition": 4701,
     "endPosition": 4800,
     "sentenceCount": 100,
-    "minEnCharLength": 53,
-    "maxEnCharLength": 55
+    "minEnCharLength": 52,
+    "maxEnCharLength": 54
   },
   {
     "rangeNumber": 49,
     "startPosition": 4801,
     "endPosition": 4900,
     "sentenceCount": 100,
-    "minEnCharLength": 55,
+    "minEnCharLength": 54,
     "maxEnCharLength": 57
   },
   {
@@ -405,46 +405,46 @@
     "endPosition": 5100,
     "sentenceCount": 100,
     "minEnCharLength": 60,
-    "maxEnCharLength": 65
+    "maxEnCharLength": 64
   },
   {
     "rangeNumber": 52,
     "startPosition": 5101,
     "endPosition": 5200,
     "sentenceCount": 100,
-    "minEnCharLength": 65,
-    "maxEnCharLength": 71
+    "minEnCharLength": 64,
+    "maxEnCharLength": 70
   },
   {
     "rangeNumber": 53,
     "startPosition": 5201,
     "endPosition": 5300,
     "sentenceCount": 100,
-    "minEnCharLength": 71,
-    "maxEnCharLength": 79
+    "minEnCharLength": 70,
+    "maxEnCharLength": 76
   },
   {
     "rangeNumber": 54,
     "startPosition": 5301,
     "endPosition": 5400,
     "sentenceCount": 100,
-    "minEnCharLength": 79,
-    "maxEnCharLength": 92
+    "minEnCharLength": 76,
+    "maxEnCharLength": 88
   },
   {
     "rangeNumber": 55,
     "startPosition": 5401,
     "endPosition": 5500,
     "sentenceCount": 100,
-    "minEnCharLength": 92,
-    "maxEnCharLength": 132
+    "minEnCharLength": 88,
+    "maxEnCharLength": 118
   },
   {
     "rangeNumber": 56,
     "startPosition": 5501,
-    "endPosition": 5516,
-    "sentenceCount": 16,
-    "minEnCharLength": 132,
+    "endPosition": 5539,
+    "sentenceCount": 39,
+    "minEnCharLength": 118,
     "maxEnCharLength": 162
   }
 ]
