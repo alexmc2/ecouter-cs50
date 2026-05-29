@@ -1,5 +1,5 @@
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { API_BASE_URL } from "../api/client";
 import type { LocalProgress } from "../storage/progressStorage";
 import type { CurrentRun } from "../types/currentRun";
@@ -68,6 +68,7 @@ export function usePlaybackEngine(
   savedProgress?: LocalProgress
 ) {
   const currentRunId = currentRun?.id ?? null;
+  const savedProgressRef = useRef(savedProgress);
   const [storedProgress, setStoredProgress] = useState(() =>
     createInitialProgress(currentRunId, savedProgress)
   );
@@ -104,11 +105,15 @@ export function usePlaybackEngine(
       const activeProgress =
         stored.runId === currentRunId
           ? stored
-          : createInitialProgress(currentRunId, savedProgress);
+          : createInitialProgress(currentRunId, savedProgressRef.current);
 
       return update(clampProgress(activeProgress, sentenceCount, stepCount));
     });
-  }, [currentRunId, savedProgress, sentenceCount, stepCount]);
+  }, [currentRunId, sentenceCount, stepCount]);
+
+  useEffect(() => {
+    savedProgressRef.current = savedProgress;
+  }, [savedProgress]);
 
   function togglePlaying(): void {
     updateProgress((progress) => ({

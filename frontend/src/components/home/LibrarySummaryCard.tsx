@@ -1,5 +1,4 @@
 
-import { AppButton } from "../shared/AppButton";
 import { AppCard } from "../shared/AppCard";
 
 interface LibrarySummaryCardProps {
@@ -14,7 +13,11 @@ export function LibrarySummaryCard({
   onOpenLibrary
 }: LibrarySummaryCardProps) {
   return (
-    <AppCard className="home-stat-card">
+    <AppCard
+      asButton
+      className="home-stat-card"
+      onClick={onOpenLibrary}
+    >
       <div className="eyebrow">Library</div>
       <div className="home-stat-grid">
         <div>
@@ -26,9 +29,9 @@ export function LibrarySummaryCard({
           <span>completed</span>
         </div>
       </div>
-      <AppButton className="app-button--full" onClick={onOpenLibrary}>
+      <span className="app-button app-button--secondary app-button--full">
         Open library
-      </AppButton>
+      </span>
     </AppCard>
   );
 }

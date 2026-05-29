@@ -110,17 +110,12 @@ function markAsCustomProfile(profile: ListeningProfile): ListeningProfile {
 
 export function useListeningProfile() {
   const [profile, setProfile] = useState<ListeningProfile>(() =>
-    readListeningProfile(),
+    normalizeBuiltInProfile(readListeningProfile()),
   );
-  const activeProfile = normalizeBuiltInProfile(profile);
 
   useEffect(() => {
-    if (activeProfile !== profile) {
-      setProfile(activeProfile);
-    }
-
-    writeListeningProfile(activeProfile);
-  }, [activeProfile, profile]);
+    writeListeningProfile(profile);
+  }, [profile]);
 
   function addStep(stepTemplate: ListeningProfileItemTemplate): void {
     setProfile((currentProfile) =>
@@ -185,7 +180,7 @@ export function useListeningProfile() {
   }
 
   return {
-    profile: activeProfile,
+    profile,
     presets: LISTENING_PROFILE_PRESETS,
     addStep,
     removeStep,

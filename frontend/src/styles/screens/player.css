@@ -151,7 +151,7 @@
 }
 
 .current-sentence__stage span {
-  color: var(--color-text-muted);
+  color: var(--color-text);
   font-weight: 800;
 }
 

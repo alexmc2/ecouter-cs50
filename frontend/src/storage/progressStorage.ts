@@ -19,25 +19,30 @@ export const defaultProgress: LocalProgress = {
   currentStepIndex: 0,
 };
 
-export function normalizeProgress(progress: Partial<LocalProgress>): LocalProgress {
+export function normalizeProgress(
+  progress: Partial<LocalProgress> | null | undefined,
+): LocalProgress {
+  const value =
+    progress && typeof progress === 'object' ? progress : defaultProgress;
+
   return {
     lastPosition:
-      typeof progress.lastPosition === 'number' && progress.lastPosition > 0
-        ? Math.floor(progress.lastPosition)
+      typeof value.lastPosition === 'number' && value.lastPosition > 0
+        ? Math.floor(value.lastPosition)
         : defaultProgress.lastPosition,
     currentRunId:
-      typeof progress.currentRunId === 'string'
-        ? progress.currentRunId
+      typeof value.currentRunId === 'string'
+        ? value.currentRunId
         : defaultProgress.currentRunId,
     currentSentenceIndex:
-      typeof progress.currentSentenceIndex === 'number' &&
-      progress.currentSentenceIndex >= 0
-        ? Math.floor(progress.currentSentenceIndex)
+      typeof value.currentSentenceIndex === 'number' &&
+      value.currentSentenceIndex >= 0
+        ? Math.floor(value.currentSentenceIndex)
         : defaultProgress.currentSentenceIndex,
     currentStepIndex:
-      typeof progress.currentStepIndex === 'number' &&
-      progress.currentStepIndex >= 0
-        ? Math.floor(progress.currentStepIndex)
+      typeof value.currentStepIndex === 'number' &&
+      value.currentStepIndex >= 0
+        ? Math.floor(value.currentStepIndex)
         : defaultProgress.currentStepIndex,
   };
 }

@@ -1,11 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap');
+
 :root,
 [data-theme='dark'] {
   --font-body:
-    'Plus Jakarta Sans', 'Avenir Next', 'Segoe UI', ui-sans-serif, system-ui,
-    sans-serif;
+    'Roboto', 'Segoe UI', ui-sans-serif, system-ui, sans-serif;
   --font-display:
-    'Plus Jakarta Sans', 'Avenir Next', 'Segoe UI', ui-sans-serif, system-ui,
-    sans-serif;
+    'Roboto', 'Segoe UI', ui-sans-serif, system-ui, sans-serif;
   --color-bg: #030714;
   --color-bg-alt: #01040c;
   --color-scene: #020817;
@@ -16,7 +16,7 @@
   --color-border-strong: rgba(202, 242, 4, 0.42);
   --color-text: #f3f8ff;
   --color-text-soft: #d6e5f7;
-  --color-text-muted: #93a9c2;
+  --color-text-muted: #bfdbfe;
   --color-text-faint: #60758d;
   --color-accent: #caf204;
   --color-accent-soft: rgba(202, 242, 4, 0.095);
