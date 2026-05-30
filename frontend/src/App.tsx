@@ -17,9 +17,13 @@ import {
   normalizeProgress,
   type LocalProgress,
 } from './storage/progressStorage';
-import { defaultSettings } from './storage/settingsStorage';
+import {
+  defaultSettings,
+  normalizeSettings,
+  type StoredAppSettings,
+} from './storage/settingsStorage';
 import type { CurrentRun } from './types/currentRun';
-import type { AppSettings, ThemeName } from './types/settings';
+import type { ThemeName } from './types/settings';
 import { createStarterCurrentRun } from './utils/createCurrentRun';
 
 function isScreenId(value: unknown): value is ScreenId {
@@ -45,14 +49,14 @@ export function App() {
     STORAGE_KEYS.progress,
     defaultProgress,
   );
-  const [settings, setSettings] = useLocalStorage<AppSettings>(
+  const [settings, setSettings] = useLocalStorage<StoredAppSettings>(
     STORAGE_KEYS.settings,
     defaultSettings,
   );
-  const activeSettings = {
-    ...defaultSettings,
-    ...settings,
-  };
+  const activeSettings = useMemo(
+    () => normalizeSettings(settings),
+    [settings],
+  );
   const progress = useMemo(
     () => normalizeProgress(storedProgress),
     [storedProgress],
@@ -87,25 +91,29 @@ export function App() {
 
   function setTheme(theme: ThemeName): void {
     setSettings((currentSettings) => ({
-      ...defaultSettings,
-      ...currentSettings,
+      ...normalizeSettings(currentSettings),
       theme,
     }));
   }
 
   function setDefaultRunSize(defaultRunSize: number): void {
     setSettings((currentSettings) => ({
-      ...defaultSettings,
-      ...currentSettings,
+      ...normalizeSettings(currentSettings),
       defaultRunSize,
     }));
   }
 
-  function setAutoHideText(autoHideText: boolean): void {
+  function setAutoShowFrenchText(autoShowFrenchText: boolean): void {
     setSettings((currentSettings) => ({
-      ...defaultSettings,
-      ...currentSettings,
-      autoHideText,
+      ...normalizeSettings(currentSettings),
+      autoShowFrenchText,
+    }));
+  }
+
+  function setAutoShowEnglishText(autoShowEnglishText: boolean): void {
+    setSettings((currentSettings) => ({
+      ...normalizeSettings(currentSettings),
+      autoShowEnglishText,
     }));
   }
 
@@ -157,7 +165,8 @@ export function App() {
         currentRun={currentRun}
         listeningProfile={listeningProfile.profile}
         savedProgress={progress}
-        autoHideText={activeSettings.autoHideText}
+        autoShowFrenchText={activeSettings.autoShowFrenchText}
+        autoShowEnglishText={activeSettings.autoShowEnglishText}
         onProgressChange={setProgress}
         onBack={() => setStoredScreen(SCREENS.HOME)}
         onChooseSet={() => setStoredScreen(SCREENS.LIBRARY)}
@@ -170,20 +179,22 @@ export function App() {
         onThemeChange={setTheme}
         defaultRunSize={activeSettings.defaultRunSize}
         onDefaultRunSizeChange={setDefaultRunSize}
-        autoHideText={activeSettings.autoHideText}
-        onAutoHideTextChange={setAutoHideText}
+        autoShowFrenchText={activeSettings.autoShowFrenchText}
+        onAutoShowFrenchTextChange={setAutoShowFrenchText}
+        autoShowEnglishText={activeSettings.autoShowEnglishText}
+        onAutoShowEnglishTextChange={setAutoShowEnglishText}
       />
     );
 
   return (
     <div className="app-root" data-theme={activeSettings.theme}>
-      {screen === SCREENS.PLAYER ? (
-        appContent
-      ) : (
-        <AppShell screen={screen} onNavigate={setStoredScreen}>
-          {appContent}
-        </AppShell>
-      )}
+      <AppShell
+        screen={screen}
+        canOpenPlayer={Boolean(currentRun)}
+        onNavigate={setStoredScreen}
+      >
+        {appContent}
+      </AppShell>
       {showProfileBuilder ? (
         <ListeningProfileBuilder
           profile={listeningProfile.profile}

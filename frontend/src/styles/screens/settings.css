@@ -26,6 +26,26 @@
   font-size: 0.78rem;
 }
 
+.settings-toggle-list {
+  display: grid;
+  gap: 10px;
+  justify-items: end;
+}
+
+.settings-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  gap: 12px;
+}
+
+.settings-toggle span {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+
 @media (max-width: 640px) {
   .settings-row {
     display: grid;
@@ -43,5 +63,15 @@
   .settings-row .pill {
     width: 100%;
     text-align: center;
+  }
+
+  .settings-toggle-list {
+    justify-items: stretch;
+  }
+
+  .settings-toggle {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 96px;
+    justify-content: stretch;
   }
 }

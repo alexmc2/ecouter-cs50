@@ -6,8 +6,10 @@ interface SettingsScreenProps {
   onThemeChange: (theme: ThemeName) => void;
   defaultRunSize: number;
   onDefaultRunSizeChange: (runSize: number) => void;
-  autoHideText: boolean;
-  onAutoHideTextChange: (autoHideText: boolean) => void;
+  autoShowFrenchText: boolean;
+  onAutoShowFrenchTextChange: (autoShowFrenchText: boolean) => void;
+  autoShowEnglishText: boolean;
+  onAutoShowEnglishTextChange: (autoShowEnglishText: boolean) => void;
 }
 
 export function SettingsScreen({
@@ -15,8 +17,10 @@ export function SettingsScreen({
   onThemeChange,
   defaultRunSize,
   onDefaultRunSizeChange,
-  autoHideText,
-  onAutoHideTextChange,
+  autoShowFrenchText,
+  onAutoShowFrenchTextChange,
+  autoShowEnglishText,
+  onAutoShowEnglishTextChange,
 }: SettingsScreenProps) {
   return (
     <main className="screen settings-screen">
@@ -63,16 +67,45 @@ export function SettingsScreen({
         </AppCard>
         <AppCard className="settings-row">
           <div>
-            <strong>Auto-hide text</strong>
-            <span>Hide revealed text when moving to the next sentence</span>
+            <strong>Auto-show text</strong>
+            <span>Show matching text automatically during playback</span>
           </div>
-          <button
-            className={`pill ${autoHideText ? 'pill--active pill--filled' : ''}`}
-            onClick={() => onAutoHideTextChange(!autoHideText)}
-            aria-pressed={autoHideText}
-          >
-            {autoHideText ? 'On' : 'Off'}
-          </button>
+          <div className="settings-toggle-list">
+            <div className="settings-toggle">
+              <span>French</span>
+              <button
+                type="button"
+                aria-label="Auto-show French text"
+                className={`pill ${
+                  autoShowFrenchText ? 'pill--active pill--filled' : ''
+                }`}
+                onClick={() =>
+                  onAutoShowFrenchTextChange(!autoShowFrenchText)
+                }
+                role="switch"
+                aria-checked={autoShowFrenchText}
+              >
+                {autoShowFrenchText ? 'On' : 'Off'}
+              </button>
+            </div>
+            <div className="settings-toggle">
+              <span>English</span>
+              <button
+                type="button"
+                aria-label="Auto-show English text"
+                className={`pill ${
+                  autoShowEnglishText ? 'pill--active pill--filled' : ''
+                }`}
+                onClick={() =>
+                  onAutoShowEnglishTextChange(!autoShowEnglishText)
+                }
+                role="switch"
+                aria-checked={autoShowEnglishText}
+              >
+                {autoShowEnglishText ? 'On' : 'Off'}
+              </button>
+            </div>
+          </div>
         </AppCard>
       </div>
     </main>

@@ -10,6 +10,7 @@ interface PlaybackProgress {
   runId: string | null;
   currentSentenceIndex: number;
   currentStepIndex: number;
+  sentenceVisitId: number;
   isPlaying: boolean;
 }
 
@@ -26,6 +27,7 @@ function createInitialProgress(
       ? savedProgress.currentSentenceIndex
       : 0,
     currentStepIndex: savedMatchesRun ? savedProgress.currentStepIndex : 0,
+    sentenceVisitId: 0,
     isPlaying: false,
   };
 }
@@ -133,6 +135,10 @@ export function usePlaybackEngine(
       ...progress,
       currentSentenceIndex: nextIndex,
       currentStepIndex: 0,
+      sentenceVisitId:
+        nextIndex === progress.currentSentenceIndex
+          ? progress.sentenceVisitId
+          : progress.sentenceVisitId + 1,
       isPlaying: false,
     }));
   }
@@ -161,6 +167,10 @@ export function usePlaybackEngine(
           ...progress,
           currentSentenceIndex: 0,
           currentStepIndex: 0,
+          sentenceVisitId:
+            progress.currentSentenceIndex === 0
+              ? progress.sentenceVisitId
+              : progress.sentenceVisitId + 1,
           isPlaying: false,
         };
       }
@@ -177,6 +187,7 @@ export function usePlaybackEngine(
           ...progress,
           currentSentenceIndex: progress.currentSentenceIndex + 1,
           currentStepIndex: 0,
+          sentenceVisitId: progress.sentenceVisitId + 1,
         };
       }
 
@@ -185,6 +196,10 @@ export function usePlaybackEngine(
           ...progress,
           currentSentenceIndex: 0,
           currentStepIndex: 0,
+          sentenceVisitId:
+            progress.currentSentenceIndex === 0
+              ? progress.sentenceVisitId
+              : progress.sentenceVisitId + 1,
         };
       }
 
@@ -253,6 +268,7 @@ export function usePlaybackEngine(
   return {
     currentSentenceIndex,
     currentStepIndex,
+    sentenceVisitId: clampedProgress.sentenceVisitId,
     currentSentence,
     currentStep,
     currentAudioUrl,

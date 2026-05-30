@@ -123,6 +123,11 @@
 }
 
 @media (max-width: 959px) {
+  .app-shell--player .player-screen {
+    overflow: visible;
+    padding-top: calc(env(safe-area-inset-top) + 84px);
+  }
+
   .screen {
     width: 100%;
     min-height: auto;

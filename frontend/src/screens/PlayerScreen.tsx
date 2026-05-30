@@ -14,13 +14,17 @@ import { ProgressBar } from '../components/shared/ProgressBar';
 import { usePlaybackEngine } from '../hooks/usePlaybackEngine';
 import type { LocalProgress } from '../storage/progressStorage';
 import type { CurrentRun } from '../types/currentRun';
-import type { ListeningProfile } from '../types/listeningProfile';
+import type {
+  ListeningProfile,
+  ListeningProfileItem,
+} from '../types/listeningProfile';
 
 interface PlayerScreenProps {
   currentRun: CurrentRun | null;
   listeningProfile: ListeningProfile;
   savedProgress: LocalProgress;
-  autoHideText: boolean;
+  autoShowFrenchText: boolean;
+  autoShowEnglishText: boolean;
   onProgressChange: Dispatch<SetStateAction<LocalProgress>>;
   onBack: () => void;
   onChooseSet: () => void;
@@ -29,16 +33,39 @@ interface PlayerScreenProps {
 }
 
 interface RevealedTextState {
-  french: boolean;
-  english: boolean;
-  sentenceIndex: number;
+  french?: boolean;
+  english?: boolean;
+  sentenceVisitId: number | null;
+}
+
+type TextLanguage = 'french' | 'english';
+
+function getAutomaticTextVisibility(
+  autoShowFrenchText: boolean,
+  autoShowEnglishText: boolean,
+  step: ListeningProfileItem | null,
+): Record<TextLanguage, boolean> {
+  if (step?.type !== 'audio') {
+    return {
+      french: false,
+      english: false,
+    };
+  }
+
+  const isFrenchStep = step.source.startsWith('fr');
+
+  return {
+    french: autoShowFrenchText && isFrenchStep,
+    english: autoShowEnglishText && !isFrenchStep,
+  };
 }
 
 export function PlayerScreen({
   currentRun,
   listeningProfile,
   savedProgress,
-  autoHideText,
+  autoShowFrenchText,
+  autoShowEnglishText,
   onProgressChange,
   onBack,
   onChooseSet,
@@ -46,9 +73,7 @@ export function PlayerScreen({
   onOpenQueue,
 }: PlayerScreenProps) {
   const [revealedText, setRevealedText] = useState<RevealedTextState>({
-    french: false,
-    english: false,
-    sentenceIndex: 0,
+    sentenceVisitId: null,
   });
   const playback = usePlaybackEngine(currentRun, listeningProfile, savedProgress);
   const totalSentences = currentRun?.sentences.length ?? 0;
@@ -59,10 +84,21 @@ export function PlayerScreen({
   const setNumber = playback.currentSentence
     ? Math.floor((playback.currentSentence.position - 1) / 100) + 1
     : null;
-  const revealIsStale =
-    autoHideText && revealedText.sentenceIndex !== playback.currentSentenceIndex;
-  const showFrench = revealIsStale ? false : revealedText.french;
-  const showEnglish = revealIsStale ? false : revealedText.english;
+  const textOverrideBelongsToCurrentSentence =
+    revealedText.sentenceVisitId === playback.sentenceVisitId;
+  const automaticTextVisibility = getAutomaticTextVisibility(
+    autoShowFrenchText,
+    autoShowEnglishText,
+    playback.currentStep,
+  );
+  const showFrench =
+    textOverrideBelongsToCurrentSentence && revealedText.french !== undefined
+      ? revealedText.french
+      : automaticTextVisibility.french;
+  const showEnglish =
+    textOverrideBelongsToCurrentSentence && revealedText.english !== undefined
+      ? revealedText.english
+      : automaticTextVisibility.english;
 
   useEffect(() => {
     if (!currentRun || !playback.currentSentence) {
@@ -97,26 +133,19 @@ export function PlayerScreen({
     playback.currentStepIndex,
   ]);
 
-  function toggleRevealedText(language: 'french' | 'english'): void {
+  function toggleRevealedText(language: TextLanguage): void {
+    const nextVisible = language === 'french' ? !showFrench : !showEnglish;
+
     setRevealedText((currentState) => {
-      const stale =
-        autoHideText &&
-        currentState.sentenceIndex !== playback.currentSentenceIndex;
+      const currentSentenceState =
+        currentState.sentenceVisitId === playback.sentenceVisitId
+          ? currentState
+          : { sentenceVisitId: playback.sentenceVisitId };
 
       return {
-        sentenceIndex: playback.currentSentenceIndex,
-        french:
-          language === 'french'
-            ? !(stale ? false : currentState.french)
-            : stale
-              ? false
-              : currentState.french,
-        english:
-          language === 'english'
-            ? !(stale ? false : currentState.english)
-            : stale
-              ? false
-              : currentState.english,
+        ...currentSentenceState,
+        sentenceVisitId: playback.sentenceVisitId,
+        [language]: nextVisible,
       };
     });
   }

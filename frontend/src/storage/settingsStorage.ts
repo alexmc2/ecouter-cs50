@@ -1,22 +1,34 @@
-
-import { STORAGE_KEYS } from "../constants/storageKeys";
-import type { AppSettings } from "../types/settings";
+import { STORAGE_KEYS } from '../constants/storageKeys';
+import type { AppSettings } from '../types/settings';
 import {
   readLocalStorageValue,
   writeLocalStorageValue,
 } from './localStorage';
 
+export type StoredAppSettings = Partial<AppSettings>;
+
 export const defaultSettings: AppSettings = {
-  theme: "dark",
+  theme: 'dark',
   defaultRunSize: 20,
-  autoHideText: true
+  autoShowFrenchText: false,
+  autoShowEnglishText: false,
 };
 
-export function readSettings(): AppSettings {
+export function normalizeSettings(settings: StoredAppSettings): AppSettings {
   return {
-    ...defaultSettings,
-    ...readLocalStorageValue<Partial<AppSettings>>(STORAGE_KEYS.settings, {}),
+    theme: settings.theme ?? defaultSettings.theme,
+    defaultRunSize: settings.defaultRunSize ?? defaultSettings.defaultRunSize,
+    autoShowFrenchText:
+      settings.autoShowFrenchText ?? defaultSettings.autoShowFrenchText,
+    autoShowEnglishText:
+      settings.autoShowEnglishText ?? defaultSettings.autoShowEnglishText,
   };
+}
+
+export function readSettings(): AppSettings {
+  return normalizeSettings(
+    readLocalStorageValue<StoredAppSettings>(STORAGE_KEYS.settings, {}),
+  );
 }
 
 export function writeSettings(settings: AppSettings): void {
