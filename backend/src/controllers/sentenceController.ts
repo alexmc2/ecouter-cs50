@@ -16,7 +16,7 @@ function readNumberParam(value: unknown, fallback: number): number {
 
 //Handles HTTP requests and responses for the sentence endpoints.
 
-//retrives a paginated list of sentences 
+//retrives a paginated list of sentences
 export function getSentences(
   req: Request,
   res: Response,
@@ -36,7 +36,7 @@ export function getSentences(
     next(error);
   }
 }
-// retrieves a single sentece by its ID and returns it as JSON. 
+// retrieves a single sentece by its ID and returns it as JSON.
 export function getSentence(
   req: Request,
   res: Response,

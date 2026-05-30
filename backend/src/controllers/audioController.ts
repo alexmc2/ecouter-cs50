@@ -6,6 +6,7 @@ type AudioParams = {
   filename: string;
 };
 
+// the audio controller handles HTTP requests for serving audio files. 
 export function serveAudio(
   req: Request<AudioParams>,
   res: Response,

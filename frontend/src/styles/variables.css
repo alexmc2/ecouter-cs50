@@ -2,10 +2,8 @@
 
 :root,
 [data-theme='dark'] {
-  --font-body:
-    'Roboto', 'Segoe UI', ui-sans-serif, system-ui, sans-serif;
-  --font-display:
-    'Roboto', 'Segoe UI', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'Roboto', 'Segoe UI', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Roboto', 'Segoe UI', ui-sans-serif, system-ui, sans-serif;
   --color-bg: #030714;
   --color-bg-alt: #01040c;
   --color-scene: #020817;
@@ -27,12 +25,12 @@
   --color-lavender: #9d8cff;
   --color-pause: #7890aa;
   --color-danger: #ff5f7e;
-  --player-card-background: #020617;
+  --player-card-background: rgba(16, 32, 56, 0.86);
   --player-card-border: rgba(202, 242, 4, 0.24);
   --player-card-glow: rgba(202, 242, 4, 0.045);
   --player-card-shadow: rgba(0, 0, 0, 0.22);
   --reveal-card-bg: rgba(3, 7, 20, 0.62);
-  --reveal-card-bg-active: rgba(15, 29, 54, 0.82);
+  --reveal-card-bg-active: #1b2a4a;
   --reveal-card-border: rgba(202, 242, 4, 0.26);
   --reveal-card-border-hover: rgba(202, 242, 4, 0.38);
   --reveal-card-border-active: rgba(202, 242, 4, 0.42);
@@ -70,7 +68,7 @@
   --color-lavender: #7b5ac0;
   --color-pause: #7b7c71;
   --color-danger: #c93050;
-  --player-card-background: rgba(255, 255, 252, 0.94);
+  --player-card-background: #ffffff;
   --player-card-border: rgba(91, 58, 232, 0.22);
   --player-card-glow: rgba(91, 58, 232, 0.035);
   --player-card-shadow: rgba(50, 48, 40, 0.08);

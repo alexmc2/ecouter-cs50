@@ -5,6 +5,7 @@ import {
   writeLocalStorageValue,
 } from './localStorage';
 
+// local progress types
 export interface LocalProgress {
   lastPosition: number;
   currentRunId: string | null;
@@ -19,6 +20,8 @@ export const defaultProgress: LocalProgress = {
   currentStepIndex: 0,
 };
 
+
+// AI assisted with writing this function. 
 export function normalizeProgress(
   progress: Partial<LocalProgress> | null | undefined,
 ): LocalProgress {

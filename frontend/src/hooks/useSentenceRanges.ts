@@ -1,7 +1,6 @@
-
-import { useEffect, useState } from "react";
-import { fetchSentenceRanges } from "../api/sentenceApi";
-import type { SentenceRange } from "../types/sentence";
+import { useEffect, useState } from 'react';
+import { fetchSentenceRanges } from '../api/sentenceApi';
+import type { SentenceRange } from '../types/sentence';
 
 export function useSentenceRanges() {
   const [data, setData] = useState<SentenceRange[]>([]);
@@ -26,7 +25,7 @@ export function useSentenceRanges() {
           setError(
             requestError instanceof Error
               ? requestError.message
-              : "Failed to load sentence ranges."
+              : 'Failed to load sentences.',
           );
         }
       } finally {

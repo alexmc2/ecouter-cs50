@@ -1,14 +1,20 @@
-
-import type { Sentence, SentenceRange } from "../types/sentence";
+import type { Sentence, SentenceRange } from '../types/sentence';
 
 export function buildSentenceRanges(
   sentences: Sentence[],
-  sentencesPerRange = 100
+  sentencesPerRange = 100,
 ): SentenceRange[] {
   const ranges: SentenceRange[] = [];
 
-  for (let startIndex = 0; startIndex < sentences.length; startIndex += sentencesPerRange) {
-    const rangeSentences = sentences.slice(startIndex, startIndex + sentencesPerRange);
+  for (
+    let startIndex = 0;
+    startIndex < sentences.length;
+    startIndex += sentencesPerRange
+  ) {
+    const rangeSentences = sentences.slice(
+      startIndex,
+      startIndex + sentencesPerRange,
+    );
     const enLengths = rangeSentences.map((sentence) => sentence.enCharLength);
     const firstSentence = rangeSentences[0];
     const lastSentence = rangeSentences.at(-1);
@@ -18,10 +24,10 @@ export function buildSentenceRanges(
       startPosition: firstSentence?.position ?? 0,
       endPosition: lastSentence?.position ?? 0,
       sentenceCount: rangeSentences.length,
-      firstFrText: firstSentence?.frText ?? "",
-      lastFrText: lastSentence?.frText ?? "",
+      firstFrText: firstSentence?.frText ?? '',
+      lastFrText: lastSentence?.frText ?? '',
       minEnCharLength: Math.min(...enLengths),
-      maxEnCharLength: Math.max(...enLengths)
+      maxEnCharLength: Math.max(...enLengths),
     });
   }
 

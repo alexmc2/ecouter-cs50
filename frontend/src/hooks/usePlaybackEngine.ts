@@ -1,10 +1,10 @@
-
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { API_BASE_URL } from "../api/client";
-import type { LocalProgress } from "../storage/progressStorage";
-import type { CurrentRun } from "../types/currentRun";
-import type { ListeningProfile } from "../types/listeningProfile";
-import { getAudioUrlForStep } from "../utils/getAudioUrlForStep";
+/*AI was used to assist in writing the playback engine logic */
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { API_BASE_URL } from '../api/client';
+import type { LocalProgress } from '../storage/progressStorage';
+import type { CurrentRun } from '../types/currentRun';
+import type { ListeningProfile } from '../types/listeningProfile';
+import { getAudioUrlForStep } from '../utils/getAudioUrlForStep';
 
 interface PlaybackProgress {
   runId: string | null;
@@ -15,7 +15,7 @@ interface PlaybackProgress {
 
 function createInitialProgress(
   runId: string | null,
-  savedProgress?: LocalProgress
+  savedProgress?: LocalProgress,
 ): PlaybackProgress {
   const savedMatchesRun =
     runId !== null && savedProgress?.currentRunId === runId;
@@ -26,7 +26,7 @@ function createInitialProgress(
       ? savedProgress.currentSentenceIndex
       : 0,
     currentStepIndex: savedMatchesRun ? savedProgress.currentStepIndex : 0,
-    isPlaying: false
+    isPlaying: false,
   };
 }
 
@@ -37,12 +37,15 @@ function clampIndex(index: number, itemCount: number): number {
 function clampProgress(
   progress: PlaybackProgress,
   sentenceCount: number,
-  stepCount: number
+  stepCount: number,
 ): PlaybackProgress {
   return {
     ...progress,
-    currentSentenceIndex: clampIndex(progress.currentSentenceIndex, sentenceCount),
-    currentStepIndex: clampIndex(progress.currentStepIndex, stepCount)
+    currentSentenceIndex: clampIndex(
+      progress.currentSentenceIndex,
+      sentenceCount,
+    ),
+    currentStepIndex: clampIndex(progress.currentStepIndex, stepCount),
   };
 }
 
@@ -65,12 +68,12 @@ function resolvePlaybackUrl(audioUrl: string): string {
 export function usePlaybackEngine(
   currentRun: CurrentRun | null,
   listeningProfile: ListeningProfile,
-  savedProgress?: LocalProgress
+  savedProgress?: LocalProgress,
 ) {
   const currentRunId = currentRun?.id ?? null;
   const savedProgressRef = useRef(savedProgress);
   const [storedProgress, setStoredProgress] = useState(() =>
-    createInitialProgress(currentRunId, savedProgress)
+    createInitialProgress(currentRunId, savedProgress),
   );
   const [loopRun, setLoopRun] = useState(true);
   const progress =
@@ -98,18 +101,19 @@ export function usePlaybackEngine(
     return audioUrl ? resolvePlaybackUrl(audioUrl) : null;
   }, [currentSentence, currentStep]);
 
-  const updateProgress = useCallback((
-    update: (progress: PlaybackProgress) => PlaybackProgress
-  ): void => {
-    setStoredProgress((stored) => {
-      const activeProgress =
-        stored.runId === currentRunId
-          ? stored
-          : createInitialProgress(currentRunId, savedProgressRef.current);
+  const updateProgress = useCallback(
+    (update: (progress: PlaybackProgress) => PlaybackProgress): void => {
+      setStoredProgress((stored) => {
+        const activeProgress =
+          stored.runId === currentRunId
+            ? stored
+            : createInitialProgress(currentRunId, savedProgressRef.current);
 
-      return update(clampProgress(activeProgress, sentenceCount, stepCount));
-    });
-  }, [currentRunId, sentenceCount, stepCount]);
+        return update(clampProgress(activeProgress, sentenceCount, stepCount));
+      });
+    },
+    [currentRunId, sentenceCount, stepCount],
+  );
 
   useEffect(() => {
     savedProgressRef.current = savedProgress;
@@ -118,7 +122,7 @@ export function usePlaybackEngine(
   function togglePlaying(): void {
     updateProgress((progress) => ({
       ...progress,
-      isPlaying: progress.isPlaying ? false : canPlay
+      isPlaying: progress.isPlaying ? false : canPlay,
     }));
   }
 
@@ -129,7 +133,7 @@ export function usePlaybackEngine(
       ...progress,
       currentSentenceIndex: nextIndex,
       currentStepIndex: 0,
-      isPlaying: false
+      isPlaying: false,
     }));
   }
 
@@ -139,14 +143,14 @@ export function usePlaybackEngine(
     updateProgress((progress) => ({
       ...progress,
       currentStepIndex: nextIndex,
-      isPlaying: progress.isPlaying && canPlay
+      isPlaying: progress.isPlaying && canPlay,
     }));
   }
 
   const stopPlayback = useCallback(() => {
     updateProgress((progress) => ({
       ...progress,
-      isPlaying: false
+      isPlaying: false,
     }));
   }, [updateProgress]);
 
@@ -157,14 +161,14 @@ export function usePlaybackEngine(
           ...progress,
           currentSentenceIndex: 0,
           currentStepIndex: 0,
-          isPlaying: false
+          isPlaying: false,
         };
       }
 
       if (progress.currentStepIndex + 1 < stepCount) {
         return {
           ...progress,
-          currentStepIndex: progress.currentStepIndex + 1
+          currentStepIndex: progress.currentStepIndex + 1,
         };
       }
 
@@ -172,7 +176,7 @@ export function usePlaybackEngine(
         return {
           ...progress,
           currentSentenceIndex: progress.currentSentenceIndex + 1,
-          currentStepIndex: 0
+          currentStepIndex: 0,
         };
       }
 
@@ -180,13 +184,13 @@ export function usePlaybackEngine(
         return {
           ...progress,
           currentSentenceIndex: 0,
-          currentStepIndex: 0
+          currentStepIndex: 0,
         };
       }
 
       return {
         ...progress,
-        isPlaying: false
+        isPlaying: false,
       };
     });
   }, [canPlay, loopRun, sentenceCount, stepCount, updateProgress]);
@@ -202,7 +206,7 @@ export function usePlaybackEngine(
       return () => window.clearTimeout(timer);
     }
 
-    if (currentStep.type === "pause") {
+    if (currentStep.type === 'pause') {
       const timer = window.setTimeout(advancePlayback, currentStep.durationMs);
 
       return () => window.clearTimeout(timer);
@@ -217,7 +221,7 @@ export function usePlaybackEngine(
     let cancelled = false;
     const audio = new Audio(currentAudioUrl);
 
-    audio.preload = "auto";
+    audio.preload = 'auto';
 
     function handleEnded(): void {
       advancePlayback();
@@ -227,8 +231,8 @@ export function usePlaybackEngine(
       stopPlayback();
     }
 
-    audio.addEventListener("ended", handleEnded);
-    audio.addEventListener("error", handleError);
+    audio.addEventListener('ended', handleEnded);
+    audio.addEventListener('error', handleError);
 
     void audio.play().catch(() => {
       if (!cancelled) {
@@ -238,19 +242,13 @@ export function usePlaybackEngine(
 
     return () => {
       cancelled = true;
-      audio.removeEventListener("ended", handleEnded);
-      audio.removeEventListener("error", handleError);
+      audio.removeEventListener('ended', handleEnded);
+      audio.removeEventListener('error', handleError);
       audio.pause();
-      audio.removeAttribute("src");
+      audio.removeAttribute('src');
       audio.load();
     };
-  }, [
-    advancePlayback,
-    currentAudioUrl,
-    currentStep,
-    isPlaying,
-    stopPlayback
-  ]);
+  }, [advancePlayback, currentAudioUrl, currentStep, isPlaying, stopPlayback]);
 
   return {
     currentSentenceIndex,
@@ -264,6 +262,6 @@ export function usePlaybackEngine(
     setLoopRun,
     moveToSentence,
     moveToStep,
-    advancePlayback
+    advancePlayback,
   };
 }

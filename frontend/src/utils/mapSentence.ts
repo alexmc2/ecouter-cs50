@@ -6,6 +6,7 @@ export function mapSourceSentence(
 ): Sentence {
   const id = sourceSentence.id;
 
+  // maps the source sentence (sentence.json) to the Sentence type used in the app.
   return {
     id,
     frText: sourceSentence.fra,

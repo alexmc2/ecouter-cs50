@@ -1,31 +1,10 @@
 // AI assisted with the creation of the audio manifest generation script.
 import fs from 'node:fs';
 import path from 'node:path';
+import { audioFilename } from './audioConfig';
 
 interface Sentence {
   id: number;
-}
-
-const DEFAULT_AUDIO_ID_WIDTH = 6;
-
-function envValue(name: string): string | undefined {
-  const value = process.env[name];
-  return value && value.length > 0 ? value : undefined;
-}
-
-function audioIdWidth(): number {
-  const rawWidth = envValue('AUDIO_ID_WIDTH') ?? envValue('R2_AUDIO_ID_WIDTH');
-  const width = rawWidth ? Number.parseInt(rawWidth, 10) : DEFAULT_AUDIO_ID_WIDTH;
-
-  if (!Number.isFinite(width) || width < 1) {
-    return DEFAULT_AUDIO_ID_WIDTH;
-  }
-
-  return width;
-}
-
-function audioFilename(id: number, suffix: string): string {
-  return `${String(id).padStart(audioIdWidth(), '0')}_${suffix}.wav`;
 }
 
 function expectedFiles(id: number) {

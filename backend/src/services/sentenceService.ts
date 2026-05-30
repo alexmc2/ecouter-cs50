@@ -1,10 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import type { PaginatedResponse } from '../types/api';
-import type {
-  Sentence,
-  SentenceRange,
-} from '../types/sentence';
+import type { Sentence, SentenceRange } from '../types/sentence';
 import { paginateItems } from '../utils/pagination';
 import { buildSentenceRanges } from './sentenceRangeService';
 
@@ -13,12 +10,16 @@ import { buildSentenceRanges } from './sentenceRangeService';
 let cachedSentences: Sentence[] | null = null;
 
 function getDefaultSentenceLibraryPath(): string {
-  const candidates = [
+  const candidateFilePaths = [
     path.resolve(process.cwd(), '../data/processed/sentences.app.json'),
     path.resolve(process.cwd(), 'data/processed/sentences.app.json'),
+    
+    
   ];
 
-  return candidates.find((candidate) => fs.existsSync(candidate)) ?? candidates[0];
+  return (
+    candidateFilePaths.find((candidate) => fs.existsSync(candidate)) ?? candidateFilePaths[0]
+  );
 }
 
 function getSentenceLibraryPath(): string {
@@ -26,14 +27,16 @@ function getSentenceLibraryPath(): string {
 }
 
 function loadSentences(): Sentence[] {
-  return JSON.parse(fs.readFileSync(getSentenceLibraryPath(), 'utf8')) as Sentence[];
+  return JSON.parse(
+    fs.readFileSync(getSentenceLibraryPath(), 'utf8'),
+  ) as Sentence[];
 }
 
 export function getAllSentences(): Sentence[] {
   if (!cachedSentences) {
     cachedSentences = loadSentences();
   }
-
+  console.log(`Loaded ${cachedSentences.length} sentences from library.`);
   return cachedSentences;
 }
 // Retrieves a paginated list of sentences.

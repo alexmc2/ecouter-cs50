@@ -8136,15 +8136,6 @@
     }
   },
   {
-    "sentenceId": 23063,
-    "files": {
-      "fr_female": "fr_f/023063_fr_f.wav",
-      "fr_male": "fr_m/023063_fr_m.wav",
-      "en_female": "en_f/023063_en_f.wav",
-      "en_male": "en_m/023063_en_m.wav"
-    }
-  },
-  {
     "sentenceId": 23064,
     "files": {
       "fr_female": "fr_f/023064_fr_f.wav",

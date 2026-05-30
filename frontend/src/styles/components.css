@@ -1,7 +1,7 @@
 .app-button {
-  border: 1px solid var(--color-border);
+  border: 2px solid var(--color-border);
   border-radius: var(--radius-control);
-  background: var(--color-panel-soft);
+  background: var(--color-panel);
   color: var(--color-text-soft);
   padding: 11px 18px;
   font-size: 0.82rem;

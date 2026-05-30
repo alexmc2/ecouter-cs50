@@ -5,6 +5,8 @@ import {
 } from '../storage/currentRunStorage';
 import type { CurrentRun } from '../types/currentRun';
 
+// this hook manages the state of the sentences that the user has selected (current run). It persists the current run to local storage. 
+
 export function useCurrentRun() {
   const [currentRun, setCurrentRun] = useState<CurrentRun | null>(() =>
     readCurrentRun(),

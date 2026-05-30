@@ -17,12 +17,9 @@ export function getAudioRootPath(): string {
 
 export function getAudioFilePath(voice: string, filename: string): string {
   if (!isAllowedVoiceFolder(voice)) {
-    throw Object.assign(
-      new Error('This audio voice folder is not allowed.'),
-      {
-        statusCode: 400,
-      },
-    );
+    throw Object.assign(new Error('This audio voice folder is not allowed.'), {
+      statusCode: 400,
+    });
   }
 
   if (

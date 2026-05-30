@@ -25,7 +25,7 @@ export function HeroCard({
           href="https://escholarship.org/uc/item/91c921b9"
           target="_blank"
           rel="noopener noreferrer"
-          style={{ color: '#caf204', textDecoration: 'none' }}
+          className="home-hero__research-link"
         >
           research
         </a>{' '}

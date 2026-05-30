@@ -1,4 +1,6 @@
 
+/* AI assisted with writing this  hook for syncing state with local storage. */
+
 import { useEffect, useState, type Dispatch, type SetStateAction } from 'react';
 import {
   readLocalStorageValue,

@@ -59,6 +59,16 @@
   line-height: 1.7;
 }
 
+.home-hero__research-link {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+.home-hero__research-link:hover {
+  color: var(--color-accent);
+  text-decoration: underline;
+}
+
 .home-hero__actions {
   display: flex;
   flex-wrap: wrap;
