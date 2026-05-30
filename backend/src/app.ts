@@ -4,7 +4,7 @@ import { env } from './config/env';
 
 import { healthRoutes } from './routes/healthRoutes';
 import { sentenceRoutes } from './routes/sentenceRoutes';
-import { audioRoutes } from './routes/audioRoutes';
+// import { audioRoutes } from './routes/audioRoutes';
 import { errorHandler } from './middleware/errorHandler';
 import { notFoundHandler } from './middleware/notFoundHandler';
 
@@ -52,6 +52,6 @@ app.get('/', (_req, res) => {
 
 app.use(healthRoutes);
 app.use(sentenceRoutes);
-app.use(audioRoutes);
+// app.use(audioRoutes);
 app.use(notFoundHandler);
 app.use(errorHandler);
