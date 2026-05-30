@@ -53,10 +53,7 @@ export function App() {
     STORAGE_KEYS.settings,
     defaultSettings,
   );
-  const activeSettings = useMemo(
-    () => normalizeSettings(settings),
-    [settings],
-  );
+  const activeSettings = useMemo(() => normalizeSettings(settings), [settings]);
   const progress = useMemo(
     () => normalizeProgress(storedProgress),
     [storedProgress],
@@ -69,6 +66,7 @@ export function App() {
   const [showQueue, setShowQueue] = useState(false);
   const listeningProfile = useListeningProfile();
   const lastPosition = Math.max(1, progress.lastPosition);
+  console.log('App render');
   const starterSentences = useSentences(
     1,
     activeSettings.defaultRunSize,
@@ -127,6 +125,8 @@ export function App() {
       currentSentenceIndex: 0,
       currentStepIndex: 0,
     });
+
+    // Moves the app to the player screen by updating the shared screen state.
     setStoredScreen(SCREENS.PLAYER);
   }
 
@@ -196,7 +196,7 @@ export function App() {
         {appContent}
       </AppShell>
       {showProfileBuilder ? (
-        <ListeningProfileBuilder
+      <ListeningProfileBuilder
           profile={listeningProfile.profile}
           presets={listeningProfile.presets}
           onAddStep={listeningProfile.addStep}

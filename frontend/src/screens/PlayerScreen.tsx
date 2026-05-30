@@ -1,9 +1,4 @@
-import {
-  useEffect,
-  useState,
-  type Dispatch,
-  type SetStateAction,
-} from 'react';
+import { useEffect, useState, type Dispatch, type SetStateAction } from 'react';
 import { CurrentSentenceDisplay } from '../components/player/CurrentSentenceDisplay';
 import { PlaybackStepDots } from '../components/player/PlaybackStepDots';
 import { PlayerControls } from '../components/player/PlayerControls';
@@ -75,7 +70,11 @@ export function PlayerScreen({
   const [revealedText, setRevealedText] = useState<RevealedTextState>({
     sentenceVisitId: null,
   });
-  const playback = usePlaybackEngine(currentRun, listeningProfile, savedProgress);
+  const playback = usePlaybackEngine(
+    currentRun,
+    listeningProfile,
+    savedProgress,
+  );
   const totalSentences = currentRun?.sentences.length ?? 0;
   const displaySentenceIndex =
     totalSentences > 0 ? playback.currentSentenceIndex + 1 : 0;
@@ -152,17 +151,12 @@ export function PlayerScreen({
 
   return (
     <main className="player-screen">
-      <PlayerHeader
-        onBack={onBack}
-        onOpenProfile={onOpenProfile}
-      />
+      <PlayerHeader onBack={onBack} onOpenProfile={onOpenProfile} />
       <section className="player-screen__main" aria-label="Audio player">
         <div className="player-shell">
           <article className="player-card">
             <section className="now-playing" aria-live="polite">
-              <CurrentSentenceDisplay
-                currentStep={playback.currentStep}
-              />
+              <CurrentSentenceDisplay currentStep={playback.currentStep} />
               <div className="profile-strip" aria-label="Listening profile">
                 <div className="profile-strip__row">
                   <span>Listening profile</span>

@@ -9,21 +9,16 @@ import { buildSentenceRanges } from './sentenceRangeService';
 
 let cachedSentences: Sentence[] | null = null;
 
-function getDefaultSentenceLibraryPath(): string {
+function getSentenceLibraryPath(): string {
   const candidateFilePaths = [
     path.resolve(process.cwd(), '../data/processed/sentences.app.json'),
     path.resolve(process.cwd(), 'data/processed/sentences.app.json'),
-    
-    
   ];
 
   return (
-    candidateFilePaths.find((candidate) => fs.existsSync(candidate)) ?? candidateFilePaths[0]
+    candidateFilePaths.find((candidate) => fs.existsSync(candidate)) ??
+    candidateFilePaths[0]
   );
-}
-
-function getSentenceLibraryPath(): string {
-  return process.env.SENTENCE_LIBRARY_PATH ?? getDefaultSentenceLibraryPath();
 }
 
 function loadSentences(): Sentence[] {
@@ -33,6 +28,7 @@ function loadSentences(): Sentence[] {
 }
 
 export function getAllSentences(): Sentence[] {
+  // reads the file once and cache the result for subsequent calls
   if (!cachedSentences) {
     cachedSentences = loadSentences();
   }

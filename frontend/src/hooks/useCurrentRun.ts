@@ -1,11 +1,8 @@
 import { useEffect, useState } from 'react';
-import {
-  readCurrentRun,
-  writeCurrentRun,
-} from '../storage/currentRunStorage';
+import { readCurrentRun, writeCurrentRun } from '../storage/currentRunStorage';
 import type { CurrentRun } from '../types/currentRun';
 
-// this hook manages the state of the sentences that the user has selected (current run). It persists the current run to local storage. 
+// this hook manages the state of the sentences that the user has selected (current run). It persists the current run to local storage.
 
 export function useCurrentRun() {
   const [currentRun, setCurrentRun] = useState<CurrentRun | null>(() =>
@@ -18,6 +15,7 @@ export function useCurrentRun() {
 
   function startRun(run: CurrentRun): void {
     setCurrentRun(run);
+    console.log('Started run', run);
   }
 
   function removeSentenceFromRun(sentenceId: number): void {

@@ -12,6 +12,8 @@ const AUDIO_LABELS: Record<AudioSource, string> = {
   en_male: "English male",
 };
 
+// Helper functions to create listening profile steps. For example, to create a profile that repeats a French audio source x times followed by an English translation.
+
 function audioStep(source: AudioSource): ListeningProfileItemTemplate {
   return {
     type: "audio",
@@ -61,6 +63,7 @@ export const DEFAULT_LISTENING_PROFILE: ListeningProfile = {
 };
 
 export const LISTENING_PROFILE_PRESETS: ListeningProfilePreset[] = [
+  
   {
     id: "male-five-translate",
     name: "Male 5x + translation",

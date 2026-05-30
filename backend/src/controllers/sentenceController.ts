@@ -10,7 +10,7 @@ function readNumberParam(value: unknown, fallback: number): number {
   const firstValue = Array.isArray(value) ? value[0] : value;
   // Parses numeric strings and return a number or fallback value
   const parsed = Number(firstValue);
-
+  // returns false for invalid (infinite) numbers
   return Number.isFinite(parsed) ? parsed : fallback;
 }
 

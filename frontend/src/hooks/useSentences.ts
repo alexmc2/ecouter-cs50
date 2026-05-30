@@ -23,6 +23,7 @@ export function useSentences(
     async function loadSentences() {
       setLoading(true);
       setError(null);
+      console.log('Loading sentences...', { page, limit, startPosition });
 
       try {
         const response = await fetchSentences(page, limit, startPosition);
