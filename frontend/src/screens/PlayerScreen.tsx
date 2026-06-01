@@ -65,7 +65,7 @@ export function PlayerScreen({
   onBack,
   onChooseSet,
   onOpenProfile,
-  onOpenQueue,
+  // onOpenQueue,
 }: PlayerScreenProps) {
   const [revealedText, setRevealedText] = useState<RevealedTextState>({
     sentenceVisitId: null,
@@ -208,7 +208,7 @@ export function PlayerScreen({
         </div>
       </section>
       <footer className="player-screen__footer">
-        <AppButton onClick={onOpenQueue}>Queue ({totalSentences})</AppButton>
+        {/* <AppButton onClick={onOpenQueue}>Queue ({totalSentences})</AppButton> */}
         <AppButton onClick={onChooseSet}>Change Set</AppButton>
       </footer>
     </main>

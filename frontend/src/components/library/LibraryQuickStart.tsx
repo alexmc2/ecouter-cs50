@@ -8,6 +8,7 @@ interface LibraryQuickStartProps {
   onPlay: () => void;
 }
 
+// quick start card for the library page.
 export function LibraryQuickStart({
   runSize,
   disabled = false,

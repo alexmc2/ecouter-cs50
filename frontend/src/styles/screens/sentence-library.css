@@ -30,10 +30,34 @@
 }
 
 .library-range-grid {
+  margin-top: 22px;
+}
+
+.library-range-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 14px;
+  color: var(--color-text-muted);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.library-range-pagination > div {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.library-range-pagination .app-button {
+  padding-block: 7px;
+}
+
+.library-range-grid__items {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
-  margin-top: 22px;
 }
 
 .sentence-range-card {
@@ -214,7 +238,36 @@
     width: 100%;
   }
 
-  .library-range-grid {
+  .library-range-pagination,
+  .library-range-pagination > div {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: stretch;
+  }
+
+  .library-range-pagination > div {
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .library-range-pagination .app-button {
+    padding-inline: 18px;
+  }
+
+  .library-range-pagination .app-button:first-child {
+    justify-self: start;
+  }
+
+  .library-range-pagination .app-button:last-child {
+    justify-self: end;
+  }
+
+  .library-range-pagination span {
+    text-align: center;
+  }
+
+  .library-range-grid__items {
     grid-template-columns: 1fr;
     gap: 10px;
   }

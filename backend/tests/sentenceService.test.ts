@@ -1,3 +1,5 @@
+// AI was used to help write the sentence service test. 
+
 import { describe, expect, it } from 'vitest';
 import {
   getAllSentences,

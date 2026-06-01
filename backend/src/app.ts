@@ -4,7 +4,6 @@ import { env } from './config/env';
 
 import { healthRoutes } from './routes/healthRoutes';
 import { sentenceRoutes } from './routes/sentenceRoutes';
-// import { audioRoutes } from './routes/audioRoutes';
 import { errorHandler } from './middleware/errorHandler';
 import { notFoundHandler } from './middleware/notFoundHandler';
 
@@ -41,17 +40,11 @@ app.get('/', (_req, res) => {
         method: 'GET',
         path: '/api/sentences/:sentenceId',
       },
-      {
-        name: 'Serve audio file',
-        method: 'GET',
-        path: '/api/audio/:voice/:filename',
-      },
     ],
   });
 });
 
 app.use(healthRoutes);
 app.use(sentenceRoutes);
-// app.use(audioRoutes);
 app.use(notFoundHandler);
 app.use(errorHandler);

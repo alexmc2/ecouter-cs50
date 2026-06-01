@@ -1,3 +1,5 @@
+// AI was used to generate the sentence routes test.
+
 import request from 'supertest';
 import { describe, expect, it } from 'vitest';
 import { app } from '../src/app';

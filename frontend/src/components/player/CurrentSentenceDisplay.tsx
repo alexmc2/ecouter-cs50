@@ -9,6 +9,7 @@ interface PlaybackStage {
   label: string;
 }
 
+// displays the current item (sentence or pause) being played in the player.
 function getPlaybackStage(step: ListeningProfileItem | null): PlaybackStage {
   if (!step) {
     return {

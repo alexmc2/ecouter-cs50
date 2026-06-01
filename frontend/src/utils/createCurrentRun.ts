@@ -5,6 +5,7 @@ function createRunId(): string {
   return `run-${Date.now()}`;
 }
 
+
 export function createCurrentRunFromSelection(
   sentences: Sentence[],
   selectedIds: Iterable<number>,

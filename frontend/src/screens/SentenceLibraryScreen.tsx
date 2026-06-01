@@ -17,6 +17,7 @@ import { ErrorState } from '../components/shared/ErrorState';
 import { LoadingState } from '../components/shared/LoadingState';
 
 const SENTENCES_PER_RANGE = 100;
+const RANGES_PER_PAGE = 10;
 
 interface SentenceLibraryScreenProps {
   onStartRun: (run: CurrentRun) => void;
@@ -28,6 +29,7 @@ export function SentenceLibraryScreen({
   const [activeRangeNumber, setActiveRangeNumber] = useState<number | null>(
     null,
   );
+  const [rangePage, setRangePage] = useState(1);
   const [runSize, setRunSize] = useState(20);
   const sentenceRanges = useSentenceRanges();
   const starterSentences = useSentences(1, runSize, true);
@@ -46,6 +48,26 @@ export function SentenceLibraryScreen({
 
   const visibleSentences =
     activeRangeNumber === null ? [] : (rangeSentences.data?.items ?? []);
+  const totalRangePages = Math.max(
+    1,
+    Math.ceil(sentenceRanges.data.length / RANGES_PER_PAGE),
+  );
+  const currentRangePage = Math.min(rangePage, totalRangePages);
+  const firstVisibleRangeIndex = (currentRangePage - 1) * RANGES_PER_PAGE;
+  const visibleRanges = sentenceRanges.data.slice(
+    firstVisibleRangeIndex,
+    firstVisibleRangeIndex + RANGES_PER_PAGE,
+  );
+  const firstVisibleRange = firstVisibleRangeIndex + 1;
+  const lastVisibleRange = firstVisibleRangeIndex + visibleRanges.length;
+
+  function showPreviousRangePage(): void {
+    setRangePage(Math.max(1, currentRangePage - 1));
+  }
+
+  function showNextRangePage(): void {
+    setRangePage(Math.min(totalRangePages, currentRangePage + 1));
+  }
 
   function showRange(rangeNumber: number): void {
     clearSelection();
@@ -133,14 +155,43 @@ export function SentenceLibraryScreen({
               message="The sentence library did not return any ranges."
             />
           ) : (
-            sentenceRanges.data.map((range) => (
-              <SentenceRangeCard
-                key={range.rangeNumber}
-                range={range}
-                active={activeRangeNumber === range.rangeNumber}
-                onSelect={showRange}
-              />
-            ))
+            <>
+              <div className="library-range-grid__items">
+                {visibleRanges.map((range) => (
+                  <SentenceRangeCard
+                    key={range.rangeNumber}
+                    range={range}
+                    active={activeRangeNumber === range.rangeNumber}
+                    onSelect={showRange}
+                  />
+                ))}
+              </div>
+              <div className="library-range-pagination">
+                <span>
+                  Showing ranges {firstVisibleRange}-{lastVisibleRange} of{' '}
+                  {sentenceRanges.data.length}
+                </span>
+                <div>
+                  <AppButton
+                    variant="ghost"
+                    disabled={currentRangePage === 1}
+                    onClick={showPreviousRangePage}
+                  >
+                    Previous
+                  </AppButton>
+                  <span aria-live="polite">
+                    Page {currentRangePage} of {totalRangePages}
+                  </span>
+                  <AppButton
+                    variant="ghost"
+                    disabled={currentRangePage === totalRangePages}
+                    onClick={showNextRangePage}
+                  >
+                    Next
+                  </AppButton>
+                </div>
+              </div>
+            </>
           )}
         </section>
       ) : (

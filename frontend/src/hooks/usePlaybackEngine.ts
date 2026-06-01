@@ -249,6 +249,8 @@ export function usePlaybackEngine(
     audio.addEventListener('ended', handleEnded);
     audio.addEventListener('error', handleError);
 
+    // audio.play() finishes asynchronously, so an old audio step may fail
+    // after a newer step has started. Ignore that late failure if cancelled.
     void audio.play().catch(() => {
       if (!cancelled) {
         stopPlayback();

@@ -29,11 +29,6 @@ describe('GET /', () => {
           method: 'GET',
           path: '/api/sentences/:sentenceId',
         },
-        {
-          name: 'Serve audio file',
-          method: 'GET',
-          path: '/api/audio/:voice/:filename',
-        },
       ],
     });
   });

@@ -1,3 +1,6 @@
+// AI was used to generate the pagination helper test. 
+// The test verifies that the pagination helper correctly returns the expected items for a given 'page' and 'limit', and the number of pages available. 
+
 import { describe, expect, it } from 'vitest';
 import { paginateItems } from '../src/utils/pagination';
 
