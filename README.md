@@ -35,17 +35,11 @@ sentence JSON
   -> frontend player
 ```
 
-The audio has been generated using a local text-to-speech LLM, and is hosted on Cloudflare R2. The app does not generate audio during practice and does not call AI services while the user is using the player.
+The audio has been generated using a local text-to-speech LLM, and is hosted on Cloudflare R2. 
 
-At runtime, the backend serves sentence metadata, and the frontend plays audio directly from the stored Cloudflare URLs.
+The backend serves the sentence metadata at runtime, and the frontend plays audio directly from the stored Cloudflare URLs.
 
 ## Runtime Data Flow
-
-In this repo, the raw sentence data is:
-
-```txt
-data/raw/sentences.json
-```
 
 The processed runtime data is:
 
