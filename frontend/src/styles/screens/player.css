@@ -61,8 +61,8 @@
 }
 
 .player-screen .app-button--ghost:hover {
-  border-color: transparent;
-  background: transparent;
+  border-color: var(--color-bg);
+  background: var(--color-bg);
   color: var(--color-text-soft);
 }
 

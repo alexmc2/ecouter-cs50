@@ -9,7 +9,8 @@
   transition:
     transform 0.12s ease,
     opacity 0.12s ease,
-    background 0.12s ease;
+    background 0.12s ease,
+    border-color 0.12s ease;
 }
 
 .app-button:active {
@@ -45,6 +46,15 @@
   padding-inline: 0;
 }
 
+.app-button--ghost:hover {
+  border-color: var(--color-bg);
+  background: var(--color-bg);
+}
+
+.app-button--secondary:hover {
+  background: var(--color-bg);
+}
+
 .app-button--full {
   width: 100%;
 }
@@ -77,6 +87,14 @@
   font-size: 0.76rem;
   font-weight: 700;
   white-space: nowrap;
+  transition:
+    background 0.12s ease,
+    border-color 0.12s ease;
+}
+
+.pill:hover {
+  border-color: var(--color-border);
+  background: var(--color-bg);
 }
 
 .pill--active {
@@ -85,9 +103,19 @@
   color: var(--color-accent);
 }
 
+.pill--active:hover {
+  border-color: var(--color-accent-line);
+  background: var(--color-accent-soft);
+}
+
 .pill--filled {
   background: var(--color-accent);
   color: var(--color-accent-text);
+}
+
+.pill--filled:hover {
+  border-color: var(--color-accent);
+  background: var(--color-accent);
 }
 
 .progress-bar {

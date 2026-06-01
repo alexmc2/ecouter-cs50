@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { ContinueCard } from '../components/home/ContinueCard';
+import { LibrarySummaryCard } from '../components/home/LibrarySummaryCard';
 import { LibraryQuickStart } from '../components/library/LibraryQuickStart';
 import { SelectionToolbar } from '../components/library/SelectionToolbar';
 import { SentenceListItem } from '../components/library/SentenceListItem';
@@ -20,19 +22,27 @@ const SENTENCES_PER_RANGE = 100;
 const RANGES_PER_PAGE = 10;
 
 interface SentenceLibraryScreenProps {
+  lastPosition: number;
+  defaultRunSize: number;
+  totalSentences: number;
+  completedCount: number;
   onStartRun: (run: CurrentRun) => void;
 }
 
 export function SentenceLibraryScreen({
+  lastPosition,
+  defaultRunSize,
+  totalSentences,
+  completedCount,
   onStartRun,
 }: SentenceLibraryScreenProps) {
   const [activeRangeNumber, setActiveRangeNumber] = useState<number | null>(
     null,
   );
   const [rangePage, setRangePage] = useState(1);
-  const [runSize, setRunSize] = useState(20);
+  const [runSize, setRunSize] = useState(defaultRunSize);
   const sentenceRanges = useSentenceRanges();
-  const starterSentences = useSentences(1, runSize, true);
+  const starterSentences = useSentences(1, runSize, true, lastPosition);
   const rangeSentences = useSentences(
     activeRangeNumber ?? 1,
     SENTENCES_PER_RANGE,
@@ -129,13 +139,25 @@ export function SentenceLibraryScreen({
       <LibraryQuickStart
         runSize={runSize}
         onRunSizeChange={setRunSize}
-        disabled={
-          starterSentences.loading ||
-          Boolean(starterSentences.error) ||
-          !starterSentences.data?.items.length
-        }
-        onPlay={playStarterRun}
       />
+
+      <section className="library-overview" aria-label="Library actions">
+        <ContinueCard
+          lastPosition={lastPosition}
+          runSize={runSize}
+          totalSentences={totalSentences}
+          disabled={
+            starterSentences.loading ||
+            Boolean(starterSentences.error) ||
+            !starterSentences.data?.items.length
+          }
+          onContinue={playStarterRun}
+        />
+        <LibrarySummaryCard
+          totalSentences={totalSentences}
+          completedCount={completedCount}
+        />
+      </section>
 
       <SelectionToolbar
         selectedCount={selectedCount}

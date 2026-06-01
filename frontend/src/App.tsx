@@ -83,6 +83,9 @@ export function App() {
 
   const [showProfileBuilder, setShowProfileBuilder] = useState(false);
   const [showQueue, setShowQueue] = useState(false);
+  const [playerBackScreen, setPlayerBackScreen] = useState<ScreenId>(
+    SCREENS.HOME,
+  );
   const listeningProfile = useListeningProfile();
 
   // Progress positions are based on sentence positions from the sentence dataset. The
@@ -147,6 +150,14 @@ export function App() {
     }));
   }
 
+  function navigateTo(nextScreen: ScreenId): void {
+    if (nextScreen === SCREENS.PLAYER && screen !== SCREENS.PLAYER) {
+      setPlayerBackScreen(screen);
+    }
+
+    setStoredScreen(nextScreen);
+  }
+
   function openRun(run: CurrentRun): void {
     // All run entry points come through openRun function (the starter run from Home and any
     // custom selection from the library). startRun resets playback to the first sentence and
@@ -162,7 +173,7 @@ export function App() {
     });
 
     // The player screen depends on the current run, so App switches to that route if not already there.
-    setStoredScreen(SCREENS.PLAYER);
+    navigateTo(SCREENS.PLAYER);
   }
 
   function startListening(): void {
@@ -187,20 +198,22 @@ export function App() {
   const appContent =
     screen === SCREENS.HOME ? (
       <HomeScreen
-        lastPosition={lastPosition}
-        defaultRunSize={activeSettings.defaultRunSize}
-        totalSentences={totalSentences}
-        completedCount={Math.max(0, lastPosition - 1)}
         startListeningDisabled={
           starterSentences.loading ||
           Boolean(starterSentences.error) ||
           !starterSentences.data?.items.length
         }
         onStartListening={startListening}
-        onBrowseSentences={() => setStoredScreen(SCREENS.LIBRARY)}
+        onBrowseSentences={() => navigateTo(SCREENS.LIBRARY)}
       />
     ) : screen === SCREENS.LIBRARY ? (
-      <SentenceLibraryScreen onStartRun={openRun} />
+      <SentenceLibraryScreen
+        lastPosition={lastPosition}
+        defaultRunSize={activeSettings.defaultRunSize}
+        totalSentences={totalSentences}
+        completedCount={Math.max(0, lastPosition - 1)}
+        onStartRun={openRun}
+      />
     ) : screen === SCREENS.PLAYER ? (
       <PlayerScreen
         currentRun={currentRun}
@@ -209,8 +222,8 @@ export function App() {
         autoShowFrenchText={activeSettings.autoShowFrenchText}
         autoShowEnglishText={activeSettings.autoShowEnglishText}
         onProgressChange={setProgress}
-        onBack={() => setStoredScreen(SCREENS.HOME)}
-        onChooseSet={() => setStoredScreen(SCREENS.LIBRARY)}
+        onBack={() => navigateTo(playerBackScreen)}
+        onChooseSet={() => navigateTo(SCREENS.LIBRARY)}
         onOpenProfile={() => setShowProfileBuilder(true)}
         onOpenQueue={() => setShowQueue(true)}
       />
@@ -232,7 +245,7 @@ export function App() {
       <AppShell
         screen={screen}
         canOpenPlayer={Boolean(currentRun)}
-        onNavigate={setStoredScreen}
+        onNavigate={navigateTo}
       >
         {appContent}
       </AppShell>
