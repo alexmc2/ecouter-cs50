@@ -1,3 +1,4 @@
+import { Analytics } from '@vercel/analytics/react';
 import { useEffect, useMemo, useState } from 'react';
 import { AppShell } from './components/layout/AppShell';
 import { ListeningProfileBuilder } from './components/listening-profile/ListeningProfileBuilder';
@@ -270,6 +271,7 @@ export function App() {
           onRemoveSentence={removeSentenceFromRun}
         />
       ) : null}
+      <Analytics />
     </div>
   );
 }
