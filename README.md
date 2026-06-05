@@ -19,6 +19,7 @@ The text is hidden by default, but the user can reveal the French text or Englis
 
 There is also a settings screen for theme, default quick-run size, and automatic text reveal options.
 
+
 ## Sentence And Audio Data
 
 Écouter uses a processed sentence dataset. Each sentence has:
